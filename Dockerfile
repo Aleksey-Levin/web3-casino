@@ -10,7 +10,6 @@ FROM ${FROSTFS_HUB_IMAGE}-adm:${FROSTFS_CORE_TAG} as frostfs-adm
 FROM ${FROSTFS_HUB_IMAGE}-cli:${FROSTFS_CORE_TAG} as frostfs-cli
 FROM ${FROSTFS_HUB_IMAGE}-ir:${FROSTFS_CORE_TAG} as frostfs-ir
 FROM ${FROSTFS_HUB_IMAGE}-storage:${FROSTFS_CORE_TAG} as frostfs-storage
-FROM ${FROSTFS_HUB_IMAGE}-adm:${FROSTFS_CORE_TAG} as frostfs-adm
 FROM ${FROSTFS_HUB_IMAGE}-s3-gw:${FROSTFS_GATES_TAG} as frostfs-s3-gw
 FROM ${FROSTFS_HUB_IMAGE}-http-gw:${FROSTFS_GATES_TAG} as frostfs-http-gw
 
@@ -33,7 +32,6 @@ COPY --from=frostfs-adm /bin/frostfs-adm /usr/bin/frostfs-adm
 COPY --from=frostfs-cli /bin/frostfs-cli /usr/bin/frostfs-cli
 COPY --from=frostfs-ir /bin/frostfs-ir /usr/bin/frostfs-ir
 COPY --from=frostfs-storage /bin/frostfs-node /usr/bin/frostfs-node
-COPY --from=frostfs-adm /bin/frostfs-adm /usr/bin/frostfs-adm
 COPY --from=frostfs-s3-gw /bin/frostfs-s3-gw /usr/bin/frostfs-s3-gw
 COPY --from=frostfs-s3-gw /bin/frostfs-s3-authmate /usr/bin/frostfs-s3-authmate
 COPY --from=frostfs-http-gw /bin/frostfs-http-gw /usr/bin/frostfs-http-gw
