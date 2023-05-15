@@ -1,0 +1,63 @@
+wallet:
+  path: /config/node-wallet.json
+  address: Nhfg3TbpwogLvDGVvAvqyThbsHgoSUKwtn
+  password: 'one'
+
+without_mainnet: true
+
+morph:
+  endpoint:
+    client:
+      - address: ws://localhost:30333/ws
+  validators: 02b3622bf4017bdfe317c58aed5f4c753f206b7db896046fa7d774bbc4bf7f8dc2
+
+timers:
+  emit:  50
+  stop_estimation:
+    mul: 1
+    div: 4
+  collect_basic_income:
+    mul: 1
+    div: 2
+  distribute_basic_income:
+    mul: 3
+    div: 4
+
+emit:
+  storage:
+    amount: 400000000
+
+audit:
+  pdp:
+    max_sleep_interval: 100ms
+
+netmap_cleaner:
+  enabled: true
+  threshold: 3
+
+locode:
+  db:
+    path: /config/locode.db
+
+workers:
+  netmap: 100
+  balance: 100
+  frostfs: 100
+  container: 100
+  alphabet: 100
+  reputation: 100
+
+logger:
+  level: info
+
+pprof:
+  enabled: false
+  address: localhost:6661
+
+prometheus:
+  enabled: false
+  address: localhost:6662
+
+control:
+  grpc:
+    endpoint: localhost:16512

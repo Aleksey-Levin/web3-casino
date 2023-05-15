@@ -1,0 +1,67 @@
+wallet:
+  path: /config/s3-gw-wallet.json
+  passphrase: ""
+  address: NN1RQ3qwnvDMVNsQw4WPkKi7BrjxdVTDZp
+
+peers:
+  0:
+    address: localhost:8080
+    priority: 1
+    weight: 1
+
+server:
+  - address: 0.0.0.0:8084
+
+logger:
+  level: debug
+
+tree:
+  service: localhost:8080
+
+rpc_endpoint: http://localhost:30333
+resolve_order:
+  - nns
+
+pprof:
+  enabled: false
+  address: localhost:8085
+
+prometheus:
+  enabled: false
+  address: localhost:8086
+
+connect_timeout: 10s
+stream_timeout: 10s
+healthcheck_timeout: 15s
+rebalance_interval: 60s
+pool_error_threshold: 100
+max_clients_count: 100
+max_clients_deadline: 30s
+
+cache:
+  objects:
+    lifetime: 300s
+    size: 150
+  list:
+    lifetime: 1m
+    size: 100
+  names:
+    lifetime: 1m
+    size: 1000
+  buckets:
+    lifetime: 1m
+    size: 500
+  system:
+    lifetime: 2m
+    size: 1000
+  accessbox:
+    lifetime: 5m
+    size: 10
+  accesscontrol:
+    lifetime: 1m
+    size: 100000
+
+placement_policy:
+  default: REP 1
+
+

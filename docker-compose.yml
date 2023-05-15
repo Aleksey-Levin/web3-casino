@@ -1,0 +1,28 @@
+---
+
+version: "2.4"
+services:
+  aio:
+    image: ${AIO_IMAGE}:${AIO_VERSION}
+    container_name: aio
+    domainname: frostfs
+    hostname: aio
+    restart: always
+    stop_signal: SIGKILL
+    healthcheck:
+      test: curl --fail http://localhost:8083
+      interval: 2s
+      retries: 100
+      start_period: 2s
+      timeout: 2s
+    volumes:
+      - data:/data
+    ports:
+      - "8081:8081"   # HTTP Gateway
+      - "30333:30333" # RPC
+      - "8080:8080"   # FrostFS API RPC
+      - "8084:8084"   # S3 Gateway
+      - "16513:16513" # Control service
+
+volumes:
+  data:

@@ -1,0 +1,15 @@
+# IDE
+.idea
+.vscode
+
+# tempfiles
+.DS_Store
+*~
+.cache
+
+temp
+tmp
+
+# binary
+bin/
+release/
