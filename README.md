@@ -1,44 +1,65 @@
 # FrostFS All-in-One
 
-Single node deployment helper provides instructions on how to deploy FrostFS
-components in the on-premise setup on one physical or virtual server. There will
-be just one instance of a service of each type, hence it is suitable for
-development purposes only and not recommended for production use.
+This repository contains Dockerfile for FrostFS All-in-One image and helper
+scripts to start container. All-in-One image contains binaries and config
+files for:
+- neo-go
+- frostfs-ir
+- frostfs-storage
+- frostfs-cli
+- frostfs-adm
+- frostfs-s3-gw
+- frostfs-s3-authmate
+- frostfs-http-gw
+
+Entrypoint script starts blockchain, inner ring, storage, s3, and http gateway
+services and configures it in the initial start.
+
+| Service                     | Port  |
+|-----------------------------|-------|
+| neo-go RPC                  | 30333 |
+| FrostFS Storage gRPC API    | 8080  |
+| FrostFS Storage Control API | 16513 |
+| FrostFS HTTP Gateway        | 8081  |
+| FrostFS S3 Gateway          | 8084  |
 
 
-# Server requirements
+# Prerequisites
 
-- Docker with docker-compose
-- `jq`
-- `curl`
+- docker v20.10 or higher
+- docker-compose v2.10 or higher
+- make v3.82 or higher
 
+> Makefile script runs docker-compose with `--wait` flag, which is introduced in
+> docker-compose v2. You can use older version of docker-compose by executing it
+> manually.
 
 # Quick Start
 
-Run container:
+Clone repository and start container with docker-compose.
 
 ``` sh
-$ git clone ssh://git@b.yadro.com:7999/obj/frostfs-aio.git /opt/frostfs
-$ cd /opt/frostfs
-$ make up
+$ git clone https://git.frostfs.info/TrueCloudLab/frostfs-aio.git
+$ cd frostfs-aio
+$ make up tick.epoch
 ```
 
-Initial start takes about 40 seconds. Its readiness is based on healthcheck done by `docker-compose`.
+Initial start initializes the storage configuration. Its readiness is based
+on a healthcheck done by `docker-compose`.
 
-The container can be stopped when needed:
+Container can be stopped with:
 
 ``` sh
 $ make down
 ```
 
-The stored data and the blockchain configuration remain until the container's volume is deleted.
-So the next time we start the container with `make up` it will take about 10 seconds to initialize.
+Data and the system configuration is stored in container's volume.
+Next time container is started, it will take less time to initialize.
 
-A storage node container uses persistent storage, so, if you've updated `aio` version
-or just want to reset the `frostfs-aio`, it's recommended to clear its local volume
-before starting the container:
+Before updating image version, reset `frostfs-aio` by clearing its local volume
+before starting container.
 
-``` sh
+```
 $ make clean
 ```
 
@@ -60,21 +81,17 @@ Node 1: 022bb4041c50d607ff871dec7e4cd7778388e0ea6849d84ccbd9aa8f32e16a8131 ONLIN
 ```
 
 If you don't see the output like this, you can wait for the new Epoch to come
-(about 1 hour), or force the starting of new epoch.
-If the commands fails, make sure you have jq installed.
+or force the starting of new epoch.
 
 ``` sh
 $ make tick.epoch
-Updating FrostFS epoch to 2
-752aa525dfb36b6447f45b41fd3906db9f6a9cdecd2cf36ce6816b1b6ef453192
+Current epoch: 1, increase to 2.
+Waiting for transactions to persist...
 ```
-
-Now everything is ready to serve your requests.
-
 
 # Build images
 
-Also, you can build the aio image itself:
+Build frostfs-aio image locally with this command.
 
 ``` sh
 $ make image-aio
