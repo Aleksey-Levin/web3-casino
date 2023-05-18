@@ -23,6 +23,11 @@ services and configures it in the initial start.
 | FrostFS HTTP Gateway        | 8081  |
 | FrostFS S3 Gateway          | 8084  |
 
+# Limitations
+
+All-in-One image contains single storage node, so the only viable policy for
+containers is `REP 1`.
+
 
 # Prerequisites
 
