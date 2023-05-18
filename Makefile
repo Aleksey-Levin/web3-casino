@@ -15,6 +15,13 @@ FROSTFS_CORE_TAG ?= "0beb7ccf"
 FROSTFS_GATES_TAG ?= "0.27.0-rc.2"
 AIO_IMAGE ?= "truecloudlab/frostfs-aio"
 
+# Variables for compose
+COMPOSE_CMD ?= docker-compose up -d
+COMPOSE_V2 = "$(shell docker compose version --short | grep -q '^2' && echo true)"
+ifeq ($(COMPOSE_V2), "true")
+        COMPOSE_CMD = docker compose up -d --wait
+endif
+
 # Variables for S3
 S3_BEARER_RULES ?= "/config/bearer-rules.json"
 S3_GATE_PUBLIC_KEY ?= "0312fe65b101565de74eedf477afb43417ff5f795732506cfddc8e044c5a030d76"
@@ -34,7 +41,7 @@ image-aio:
 
 # Start AIO
 up:
-	@docker-compose up --wait -d
+	@$(COMPOSE_CMD)
 
 # Stop AIO
 down:
