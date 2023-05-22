@@ -5,7 +5,7 @@ morph:
 
 control:
   grpc:
-    endpoint: localhost:16513
+    endpoint: 0.0.0.0:16513
 
 node:
   wallet:
