@@ -45,10 +45,14 @@ runServices() {
 
   while [[ -z "$(/usr/bin/frostfs-cli control healthcheck --endpoint localhost:16513 -c /config/cli-cfg-sn.yaml | grep 'Health status: READY')" ]];
   do
-    sleep 5;
+    sleep 2
   done
 
-  /usr/bin/frostfs-adm morph force-new-epoch --config /config/frostfs-adm.yml || die "Failed to update epoch"
+  while [[ -z "$(/usr/bin/frostfs-cli control healthcheck --endpoint localhost:16513 -c /config/cli-cfg-sn.yaml | grep 'Network status: ONLINE')" ]];
+  do
+    /usr/bin/frostfs-adm morph force-new-epoch --config /config/frostfs-adm.yml || die "Failed to update epoch"
+    sleep 2
+  done
 
   /usr/bin/frostfs-s3-gw --config /config/s3-gw-config.yaml &
   /usr/bin/frostfs-http-gw --config /config/http-gw-config.yaml &
