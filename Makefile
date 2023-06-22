@@ -16,10 +16,13 @@ FROSTFS_GATES_TAG ?= "0.27.0-rc.2"
 AIO_IMAGE ?= "truecloudlab/frostfs-aio"
 
 # Variables for compose
-COMPOSE_CMD ?= docker-compose up -d
+COMPOSE_CMD_UP ?= docker-compose up -d
+COMPOSE_CMD_DOWN ?= docker-compose down
+
 COMPOSE_V2 = "$(shell docker compose version --short | grep -q '^2' && echo true)"
 ifeq ($(COMPOSE_V2), "true")
-        COMPOSE_CMD = docker compose up -d --wait
+	COMPOSE_CMD_UP = docker compose up -d --wait
+	COMPOSE_CMD_DOWN = docker compose down
 endif
 
 # Variables for S3
@@ -41,15 +44,15 @@ image-aio:
 
 # Start AIO
 up:
-	@$(COMPOSE_CMD)
+	@$(COMPOSE_CMD_UP)
 
 # Stop AIO
 down:
-	@docker-compose down
+	@$(COMPOSE_CMD_DOWN)
 
 # Clean up
 clean:
-	@docker volume rm frostfs-aio_data
+	@$(COMPOSE_CMD_DOWN) --volumes
 
 # Generate S3 credentials
 s3cred:
