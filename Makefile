@@ -11,8 +11,8 @@ VERSION ?= "$(shell git describe --tags --match "v*" 2>/dev/null || git rev-pars
 NEOGO_HUB_IMAGE ?= "nspccdev/neo-go"
 NEOGO_HUB_TAG ?= "0.101.1"
 FROSTFS_HUB_IMAGE ?= "truecloudlab/frostfs"
-FROSTFS_CORE_TAG ?= "0beb7ccf"
-FROSTFS_GATES_TAG ?= "0.27.0-rc.2"
+FROSTFS_CORE_TAG ?= "0.36.0"
+FROSTFS_GATES_TAG ?= "0.27.0"
 AIO_IMAGE ?= "truecloudlab/frostfs-aio"
 
 # Variables for compose
