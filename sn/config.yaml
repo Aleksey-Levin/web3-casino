@@ -22,7 +22,7 @@ grpc:
   0:
     endpoint: 0.0.0.0:8080
     tls:
-      enables: false
+      enabled: false
 
 logger:
   level: debug
