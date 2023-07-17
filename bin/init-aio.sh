@@ -14,7 +14,7 @@ die() {
 runBlockchain() {
   stage "Starting the blockchain"
 
-  /usr/bin/privnet-entrypoint.sh node --config-path /config --privnet &
+  /usr/bin/neo-go node --config-path /config --privnet &
 
   while [[ "$(curl -s -o /dev/null -w %{http_code} localhost:30333)" != "422" ]];
   do

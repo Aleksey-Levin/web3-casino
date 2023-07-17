@@ -25,8 +25,6 @@ RUN apk add --no-cache \
 
 WORKDIR /
 
-COPY --from=neo-go /usr/bin/privnet-entrypoint.sh /usr/bin/privnet-entrypoint.sh
-COPY --from=neo-go /etc/ssl/certs /etc/ssl/certs
 COPY --from=neo-go /usr/bin/neo-go /usr/bin/neo-go
 COPY --from=frostfs-adm /bin/frostfs-adm /usr/bin/frostfs-adm
 COPY --from=frostfs-cli /bin/frostfs-cli /usr/bin/frostfs-cli
@@ -55,7 +53,7 @@ COPY ./sn/config.yaml /config/config-sn.yaml
 COPY ./vendor/locode_db /config/locode.db
 COPY ./vendor/contracts/ /config/contracts
 
-COPY ./bin/ /config/bin
+COPY ./bin/init-aio.sh /config/bin/init-aio.sh
 
 ENV AUTHMATE_WALLET_PASSPHRASE=""
 
