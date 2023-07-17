@@ -96,10 +96,32 @@ Waiting for transactions to persist...
 
 # Build images
 
-Build frostfs-aio image locally with this command.
+## Standard image
+
+Build frostfs-aio image with this command.
 
 ``` sh
 $ make image-aio
+```
+
+## Image with local binaries
+
+Put all the needed pre-built binaries to the `frostfs-aio/bin/`:
+
+- neo-go
+- frostfs-adm
+- frostfs-cli
+- frostfs-ir
+- frostfs-node
+- frostfs-s3-gw
+- frostfs-s3-authmate
+- frostfs-http-gw
+
+Make sure they all have the `x` right for the execution enabled.
+Build frostfs-aio image using pre-built local binaries for all the services.
+
+``` sh
+$ make image-aio-local
 ```
 
 

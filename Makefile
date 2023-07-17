@@ -31,7 +31,7 @@ S3_GATE_PUBLIC_KEY ?= "0312fe65b101565de74eedf477afb43417ff5f795732506cfddc8e044
 
 # Build aio Docker image
 image-aio:
-	@echo "⇒ Build aio docker image "
+	@echo "⇒ Build aio docker image"
 	@docker build \
 		--rm \
 		--build-arg FROSTFS_HUB_IMAGE=$(FROSTFS_HUB_IMAGE) \
@@ -40,6 +40,14 @@ image-aio:
 		--build-arg NEOGO_HUB_IMAGE=$(NEOGO_HUB_IMAGE) \
 		--build-arg NEOGO_TAG=$(NEOGO_HUB_TAG) \
 		-f Dockerfile \
+		-t $(AIO_IMAGE):$(AIO_VERSION) .
+
+# Build aio Docker image from all local pre-built binaries
+image-aio-local:
+	@echo "⇒ Build aio docker image from all local pre-built binaries"
+	@docker build \
+		--rm \
+		-f Dockerfile.local \
 		-t $(AIO_IMAGE):$(AIO_VERSION) .
 
 # Start AIO
