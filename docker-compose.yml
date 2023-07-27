@@ -17,6 +17,7 @@ services:
       timeout: 2s
     volumes:
       - data:/data
+      - ./wallets:/wallets
     ports:
       - "8081:8081"   # HTTP Gateway
       - "30333:30333" # RPC

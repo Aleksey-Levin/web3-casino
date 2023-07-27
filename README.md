@@ -191,6 +191,25 @@ $ aws s3api --endpoint http://localhost:8084 list-objects --bucket koty
 }
 ```
 
+### S3 credentials from custom wallets
+
+Credentials made by `make s3cred` command are based on the private key from 
+`s3-gw/user-wallet.json` file. If you need to create credential for different
+users, use wallets from `wallets` dir.
+
+```sh
+$ make s3cred-custom wallet=wallet2.json
+{
+  "access_key_id": "jHhL5B33o16R4jQsb8wm9A3RRdS6KrTB5N4bja9Jys904W7xXFNKqem2ACvTRWRYJsZMCUikYFSokN7pPJziWyDi",
+  "secret_access_key": "21bb64fafa32c82417fd8b97ac56cc8a085998a3852632d52fe7042453daa440",
+  "owner_private_key": "10f6f9d7a47bb0bf68363ad8a99fe69f1493f8b6e1665b3e4e83feb2d5c7ee39",
+  "wallet_public_key": "03e38759973a6bb722baabc2dd84036a39f0b2f53d32fec45a4dacde8a50fe4b70",
+  "container_id": "jHhL5B33o16R4jQsb8wm9A3RRdS6KrTB5N4bja9Jys9"
+}
+```
+
+To get credentials from custom wallet, place it in `wallets` dir before start.
+Make sure that wallet account has empty password.
 
 ## frostfs-cli interface
 

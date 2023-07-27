@@ -69,8 +69,17 @@ s3cred:
 		--peer localhost:8080 \
 		--gate-public-key $(S3_GATE_PUBLIC_KEY) \
 		--container-placement-policy "REP 1" \
-		--bearer-rules $(S3_BEARER_RULES) 
-                
+		--bearer-rules $(S3_BEARER_RULES)
+
+# Generate S3 credentials based on imported wallets
+s3cred-custom:
+	@docker exec aio /usr/bin/frostfs-s3-authmate issue-secret \
+		--wallet /wallets/$(wallet) \
+		--peer localhost:8080 \
+		--gate-public-key $(S3_GATE_PUBLIC_KEY) \
+		--container-placement-policy "REP 1" \
+		--bearer-rules $(S3_BEARER_RULES)
+
 # Tick new epoch in side chain
 tick.epoch:
 	@docker exec aio /usr/bin/frostfs-adm --config /config/frostfs-adm.yml morph force-new-epoch
