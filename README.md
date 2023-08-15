@@ -211,6 +211,73 @@ $ make s3cred-custom wallet=wallet2.json
 To get credentials from custom wallet, place it in `wallets` dir before start.
 Make sure that wallet account has empty password.
 
+### Making a custom wallet
+
+Command line interface of `neo-go` is used to create new wallets. Both `neo-go`
+from the image or [downloaded binary](https://github.com/nspcc-dev/neo-go/releases)
+can be used. We stick to the one in the image in this example.
+
+Invoke a shell of the running container:
+```bash
+$ docker exec -it aio bash
+```
+
+Create a new wallet:
+
+```bash
+$ neo-go wallet init -a --wallet /wallets/new-wallet.json
+```
+
+- key `-a` means the new wallet must have an account.
+- key `--wallet /wallets/new-wallet.json` sets the outputh path for the new wallet.
+The image keeps wallets at `/wallets` for simplicity.
+
+Then `neo-go` asks for the account name and its password using interactive
+mode. Leave the password empty.
+
+```bash
+Enter the name of the account > Some Name
+Enter new password >
+Confirm password >
+``` 
+
+If everything is rigth, the stdout will show a pretty-printed contents of the wallet:
+```bash
+{
+        "version": "1.0",
+        "accounts": [
+                {
+                        "address": "NapWfRshCv9T3UyGxSfPr6NKiTFa5sVwQx",
+                        "key": "6PYKKPtBRuKvTqjAuUZk5hVDgG5aZ3HQvp1hSQg5jDyUF9JaP5Jcy3kWiV",
+                        "label": "Some Name",
+                        "contract": {
+                                "script": "DCECGXJggQTMyMhYS9YtWzTP+3FbiGLn2h7za1zSNgMDkIxBVuezJw==",
+                                "parameters": [
+                                        {
+                                                "name": "parameter0",
+                                                "type": "Signature"
+                                        }
+                                ],
+                                "deployed": false
+                        },
+                        "lock": false,
+                        "isDefault": false
+                }
+        ],
+        "scrypt": {
+                "n": 16384,
+                "r": 8,
+                "p": 8
+        },
+        "extra": {
+                "Tokens": null
+        }
+ }
+
+wallet successfully created, file location is /wallets/new-wallet.json
+```
+
+
 ## frostfs-cli interface
 
 ### Create container with frostfs-cli
