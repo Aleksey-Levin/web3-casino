@@ -1,0 +1,5 @@
+name: "Coin"
+supportedstandards: []
+events:
+permissions:
+  - methods: []
