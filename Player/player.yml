@@ -1,0 +1,11 @@
+name: Player
+sourceurl: http://example.com/
+safemethods: []
+supportedstandards: []
+events:
+    - name: Hello world!
+      parameters:
+        - name: args
+          type: Array
+permissions:
+    - methods: '*'
