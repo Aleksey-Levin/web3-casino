@@ -1,1 +1,0 @@
-{"name":"Coin","abi":{"methods":[{"name":"isWinner","offset":0,"parameters":[{"name":"playerName","type":"String"}],"returntype":"Boolean","safe":false}],"events":[]},"features":{},"groups":[],"permissions":[{"contract":"*","methods":[]}],"supportedstandards":[],"trusts":[],"extra":null}
