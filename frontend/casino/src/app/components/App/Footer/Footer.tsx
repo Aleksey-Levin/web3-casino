@@ -1,7 +1,7 @@
 export const Footer = () => {
     return (
-        <div>
-
+        <div style={{ height: 'max-content '}}>
+            Footer
         </div>
     );
 };
