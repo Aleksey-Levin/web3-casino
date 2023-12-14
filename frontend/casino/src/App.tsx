@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom'
 
-import { router } from './app/pages/router.tsx'
 import { Providers } from './providers.tsx'
+import {router} from "./app/pages/router.tsx";
 
 export const App = function App() {
     return (
