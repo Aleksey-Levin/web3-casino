@@ -9,8 +9,6 @@ import (
 )
 
 const (
-	gasDecimals    = 1_0000_0000
-	initialBalance = 3000
 	zaCoinHashKey = "zaCoinHash"
 )
 
