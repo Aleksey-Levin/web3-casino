@@ -1,4 +1,4 @@
-module SlotMashine
+module Roulette
 
 go 1.21.5
 
