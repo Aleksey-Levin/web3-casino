@@ -8,8 +8,6 @@ import (
 )
 
 const (
-	gasDecimals    = 1_0000_0000
-	initialBalance = 3000
 	zaCoinHashKey  = "zaCoinHash"
 )
 
@@ -44,8 +42,9 @@ func PlayRoulette(bet int, selectedNumber int) {
 }
 
 func isWinner(selectedNumber int) bool {
+	rouletteNumberMes := "Roulette number: "
 	rouletteNumber := (runtime.GetRandom() % 36) + 1
-	runtime.Notify("Roulette number:", rouletteNumber)
+	runtime.Notify(rouletteNumberMes, rouletteNumber)
 
 	return rouletteNumber == selectedNumber
 }
