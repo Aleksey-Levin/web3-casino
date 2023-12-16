@@ -43,17 +43,15 @@ func PlayCraps(bet int, firstSum int, secondSum int) {
 }
 
 func isWinner(firstSum int, secondSum int) bool {
-	crupNumber:="Crup number: "
-	rundomNumber:=" Random number: "
-	if (!((firstSum >= 3 && firstSum <= 18) && (secondSum >= 3 && firstSum <= 18))){
-		panic("first and second sum should be from 3 to 18")
+	if (!((firstSum >= 2 && firstSum <= 12) && (secondSum >= 2 && firstSum <= 12))){
+		panic("first and second sum should be from 2 to 12")
 	}
 
 	sum := 0
-
-	for i:=0; i<3; i++ {
+	for i:=0; i<2; i++ {
 		crap := (runtime.GetRandom() % 6) + 1
-        	runtime.Notify(crupNumber, i+1, rundomNumber, crap)
+		runtime.Notify("Crup number", i+1)
+		runtime.Notify("Random number", crap)
 		sum += crap
 	}
 

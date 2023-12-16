@@ -42,9 +42,8 @@ func PlayRoulette(bet int, selectedNumber int) {
 }
 
 func isWinner(selectedNumber int) bool {
-	rouletteNumberMes := "Roulette number: "
 	rouletteNumber := (runtime.GetRandom() % 36) + 1
-	runtime.Notify(rouletteNumberMes, rouletteNumber)
+	runtime.Notify("rouletteNumber", rouletteNumber)
 
 	return rouletteNumber == selectedNumber
 }
