@@ -34,7 +34,7 @@ func _deploy(data interface{}, isUpdate bool) {
 func RollSlot(bet int) {
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
-	res := Roll()
+	res := roll()
 	if (res == 0){
 		changePlayerBalance(ctx, playerOwner, -bet)
 	} else {
@@ -43,17 +43,19 @@ func RollSlot(bet int) {
 	}
 }
 
-func Roll() int {
-	wheelNumber:="Wheel number: "
-	value:=" Value: "
+func roll() int {
+
 	firstWheel := (runtime.GetRandom() % 8) + 1
-	runtime.Notify(wheelNumber, 1, value, firstWheel)
+	runtime.Notify("wheelNumber", 1)
+        runtime.Notify("value", firstWheel)
 
 	secondWheel := (runtime.GetRandom() % 8) + 1
-	runtime.Notify(wheelNumber, 2, value, secondWheel)
+	runtime.Notify("wheelNumber", 2)
+        runtime.Notify("value", secondWheel)
 
 	thirdWheel := (runtime.GetRandom() % 8) + 1
-	runtime.Notify(wheelNumber, 3, value, thirdWheel)
+	runtime.Notify("wheelNumber", 3)
+        runtime.Notify("value", thirdWheel)
 
 	if (firstWheel == secondWheel && firstWheel == thirdWheel){
 		return firstWheel
