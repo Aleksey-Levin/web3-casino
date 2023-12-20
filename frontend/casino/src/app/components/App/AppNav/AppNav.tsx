@@ -1,9 +1,9 @@
-import CoinIcon from "../../../utils/icons/CoinIcon";
-import GameIcon from "../../../utils/icons/GameIcon";
-import ProfileIcon from "../../../utils/icons/ProfileIcon";
-import SearchIcon from "../../../utils/icons/SearchIcon";
-import SportIcon from "../../../utils/icons/SportIcon";
-import WalletIcon from "../../../utils/icons/WalletIcon";
+import CoinIcon from "../../icons/CoinIcon";
+import GameIcon from "../../icons/GameIcon";
+import ProfileIcon from "../../icons/ProfileIcon";
+import SearchIcon from "../../icons/SearchIcon";
+import SportIcon from "../../icons/SportIcon";
+import WalletIcon from "../../icons/WalletIcon";
 
 export const AppNav = () => {
     return (

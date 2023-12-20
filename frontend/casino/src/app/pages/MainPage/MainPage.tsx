@@ -1,6 +1,6 @@
-import CoinIcon from "../../utils/icons/CoinIcon";
+import CoinIcon from "../../components/icons/CoinIcon";
 import ContainerLayout from "../../utils/ContainerLayout";
-import GamepadIcon from "../../utils/icons/GamepadIcon";
+import GamepadIcon from "../../components/icons/GamepadIcon";
 
 export const MainPage = () => {
     return (

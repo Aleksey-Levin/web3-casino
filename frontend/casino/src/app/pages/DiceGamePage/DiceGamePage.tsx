@@ -1,5 +1,5 @@
 import ContainerLayout from "../../utils/ContainerLayout"
-import { DicePlayButton } from "../../utils/web3/DicePlayButton"
+import { DicePlayButton } from "../../components/web3/DicePlayButton"
 
 export const DiceGamePage = () => {
     return (
