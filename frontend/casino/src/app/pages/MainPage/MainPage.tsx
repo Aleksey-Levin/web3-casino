@@ -165,6 +165,6 @@ export const MainPage = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </ContainerLayout>
     );
 };
