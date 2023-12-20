@@ -58,7 +58,7 @@ export const MainPage = () => {
                                     <span className="text-xl font-bold">DICE</span>
                                     <div className="text-gray-400 font-medium">562 online</div>
                                 </div>
-                                <button className=" min-w-[100px] max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3">Play now</button>
+                                <a href="/dice" className="min-w-[100px] max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center">Play now</a>
                             </div>
                             <div className="flex flex-row justify-between">
                                 <div className="flex flex-col">
