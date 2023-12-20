@@ -41,7 +41,7 @@ export const MainPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-row justify-between justify-evenly">
+                    <div className="flex flex-row justify-evenly">
                         {/* dices */}
                         <div className="w-[374px] h-[187.35px] bg-[#323846] rounded-[23px] border-2 border-gray-700 flex flex-row items-center justify-between px-4 py-6 gap-3">
                             <div className="rounded-full bg-neutral-800 inline-block">
@@ -65,7 +65,7 @@ export const MainPage = () => {
                                             Hourly drop
                                         </span>
                                         <div className="flex flex-row gap-2">
-                                            <span className="font-medium font-[13px]">217.32</span>
+                                            <span className="font-medium">217.32</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
                                                 <path d="M9 19.8182C13.4183 19.8182 17 15.6504 17 10.5091C17 5.36783 13.4183 1.20001 9 1.20001C4.58172 1.20001 1 5.36783 1 10.5091C1 15.6504 4.58172 19.8182 9 19.8182Z" fill="#E5A425" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M7.3999 6.7854H9.3999H10.1999C11.0835 6.7854 11.7999 7.61898 11.7999 8.64722C11.7999 9.67545 11.0835 10.509 10.1999 10.509H7.3999V6.7854Z" fill="#E5A425" />
@@ -83,7 +83,7 @@ export const MainPage = () => {
                                             Daily drop
                                         </span>
                                         <div className="flex flex-row gap-2">
-                                            <span className="font-medium font-[13px]">217.32</span>
+                                            <span className="font-medium">217.32</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
                                                 <path d="M9 19.8182C13.4183 19.8182 17 15.6504 17 10.5091C17 5.36783 13.4183 1.20001 9 1.20001C4.58172 1.20001 1 5.36783 1 10.5091C1 15.6504 4.58172 19.8182 9 19.8182Z" fill="#E5A425" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M7.3999 6.7854H9.3999H10.1999C11.0835 6.7854 11.7999 7.61898 11.7999 8.64722C11.7999 9.67545 11.0835 10.509 10.1999 10.509H7.3999V6.7854Z" fill="#E5A425" />
@@ -121,7 +121,7 @@ export const MainPage = () => {
                                             Hourly drop
                                         </span>
                                         <div className="flex flex-row gap-2">
-                                            <span className="font-medium font-[13px]">367.27</span>
+                                            <span className="font-medium">367.27</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
                                                 <path d="M9 19.8182C13.4183 19.8182 17 15.6504 17 10.5091C17 5.36783 13.4183 1.20001 9 1.20001C4.58172 1.20001 1 5.36783 1 10.5091C1 15.6504 4.58172 19.8182 9 19.8182Z" fill="#E5A425" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M7.3999 6.7854H9.3999H10.1999C11.0835 6.7854 11.7999 7.61898 11.7999 8.64722C11.7999 9.67545 11.0835 10.509 10.1999 10.509H7.3999V6.7854Z" fill="#E5A425" />
@@ -139,7 +139,7 @@ export const MainPage = () => {
                                             Daily drop
                                         </span>
                                         <div className="flex flex-row gap-2">
-                                            <span className="font-medium font-[13px]">1,984.18</span>
+                                            <span className="font-medium">1,984.18</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
                                                 <path d="M9 19.8182C13.4183 19.8182 17 15.6504 17 10.5091C17 5.36783 13.4183 1.20001 9 1.20001C4.58172 1.20001 1 5.36783 1 10.5091C1 15.6504 4.58172 19.8182 9 19.8182Z" fill="#E5A425" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M7.3999 6.7854H9.3999H10.1999C11.0835 6.7854 11.7999 7.61898 11.7999 8.64722C11.7999 9.67545 11.0835 10.509 10.1999 10.509H7.3999V6.7854Z" fill="#E5A425" />
@@ -176,7 +176,7 @@ export const MainPage = () => {
                                             Hourly drop
                                         </span>
                                         <div className="flex flex-row gap-2">
-                                            <span className="font-medium font-[13px]">198.47</span>
+                                            <span className="font-medium">198.47</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
                                                 <path d="M9 19.8182C13.4183 19.8182 17 15.6504 17 10.5091C17 5.36783 13.4183 1.20001 9 1.20001C4.58172 1.20001 1 5.36783 1 10.5091C1 15.6504 4.58172 19.8182 9 19.8182Z" fill="#E5A425" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M7.3999 6.7854H9.3999H10.1999C11.0835 6.7854 11.7999 7.61898 11.7999 8.64722C11.7999 9.67545 11.0835 10.509 10.1999 10.509H7.3999V6.7854Z" fill="#E5A425" />
@@ -194,7 +194,7 @@ export const MainPage = () => {
                                             Daily drop
                                         </span>
                                         <div className="flex flex-row gap-2">
-                                            <span className="font-medium font-[13px]">1,487.28</span>
+                                            <span className="font-medium">1,487.28</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
                                                 <path d="M9 19.8182C13.4183 19.8182 17 15.6504 17 10.5091C17 5.36783 13.4183 1.20001 9 1.20001C4.58172 1.20001 1 5.36783 1 10.5091C1 15.6504 4.58172 19.8182 9 19.8182Z" fill="#E5A425" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M7.3999 6.7854H9.3999H10.1999C11.0835 6.7854 11.7999 7.61898 11.7999 8.64722C11.7999 9.67545 11.0835 10.509 10.1999 10.509H7.3999V6.7854Z" fill="#E5A425" />
