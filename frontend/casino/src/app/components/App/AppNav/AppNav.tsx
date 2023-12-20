@@ -1,13 +1,13 @@
-import CoinIcon from "../../../utils/CoinIcon";
-import GameIcon from "../../../utils/GameIcon";
-import ProfileIcon from "../../../utils/ProfileIcon";
-import SearchIcon from "../../../utils/SearchIcon";
-import SportIcon from "../../../utils/SportIcon";
-import WalletIcon from "../../../utils/WalletIcon";
+import CoinIcon from "../../../utils/icons/CoinIcon";
+import GameIcon from "../../../utils/icons/GameIcon";
+import ProfileIcon from "../../../utils/icons/ProfileIcon";
+import SearchIcon from "../../../utils/icons/SearchIcon";
+import SportIcon from "../../../utils/icons/SportIcon";
+import WalletIcon from "../../../utils/icons/WalletIcon";
 
 export const AppNav = () => {
     return (
-        <div style={{ height: 'max-content' }} className="bg-[#30333C] h-max-content text-white py-2">
+        <div style={{ height: 'max-content' }} className="bg-[#30333C] text-white py-2 z-50">
             <div className="container mx-auto">
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-row items-center">
