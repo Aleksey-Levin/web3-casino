@@ -1,8 +1,10 @@
 import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom'
 
 import { AppLayout } from '../components/App'
-import {MainPage} from "./MainPage/MainPage.tsx";
-import {NotMainPage} from "./NotMainPage/NotMainPage.tsx";
+import { MainPage } from "./MainPage/MainPage.tsx";
+import { NotMainPage } from "./NotMainPage/NotMainPage.tsx";
+import { DiceGamePage } from './DiceGamePage/DiceGamePage.tsx';
+
 const routes: RouteObject[] = [
   {
     path: '/',
@@ -11,6 +13,10 @@ const routes: RouteObject[] = [
   {
     path: '/example',
     element: <NotMainPage />,
+  },
+  {
+    path: '/dice',
+    element: <DiceGamePage />,
   },
   {
     path: '*',
