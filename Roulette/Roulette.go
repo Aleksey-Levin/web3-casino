@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	zaCoinHashKey  = "zaCoinHash"
+	zaCoinHashKey = "zaCoinHash"
 )
 
 func _deploy(data interface{}, isUpdate bool) {
@@ -31,9 +31,22 @@ func _deploy(data interface{}, isUpdate bool) {
 func PlayRoulette(bet int, selectedNumber int) {
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
+
+	if bet <= 0 {
+		panic("Invalid bet amount")
+	}
+
+	playerBalance := contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+	if playerBalance < bet {
+		panic("Insufficient funds")
+	}
+
+	if selectedNumber < 1 || selectedNumber > 36 {
+		panic("Illegal number selected for roulette")
+	}
+
 	isWin := isWinner(selectedNumber)
 	if isWin {
-		// Calculate win amount based on the selectedNumber
 		winAmount := calculateWinAmount(bet, selectedNumber)
 		changePlayerBalance(ctx, playerOwner, winAmount)
 	} else {
@@ -43,16 +56,14 @@ func PlayRoulette(bet int, selectedNumber int) {
 
 func isWinner(selectedNumber int) bool {
 	rouletteNumber := (runtime.GetRandom() % 36) + 1
-	runtime.Notify("rouletteNumber", rouletteNumber)
-
 	return rouletteNumber == selectedNumber
 }
 
 func calculateWinAmount(bet int, selectedNumber int) int {
 	coefficients := map[int]int{
-		1:  36,
-		2:  18,
-		3:  2,
+		1: 36,
+		2: 18,
+		3: 2,
 	}
 
 	if coefficient, ok := coefficients[selectedNumber]; ok {
