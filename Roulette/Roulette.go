@@ -35,7 +35,7 @@ func PlayRoulette(bet int, selectedNumber int) {
 	if bet <= 0 {
 		panic("Invalid bet amount")
 	}
-
+	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
 	playerBalance := contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
 	if playerBalance < bet {
 		panic("Insufficient funds")
@@ -56,6 +56,8 @@ func PlayRoulette(bet int, selectedNumber int) {
 
 func isWinner(selectedNumber int) bool {
 	rouletteNumber := (runtime.GetRandom() % 36) + 1
+	runtime.Notify("rouletteNumber", rouletteNumber)
+	runtime.Log("rouletteNumber " + string(rouletteNumber))
 	return rouletteNumber == selectedNumber
 }
 
