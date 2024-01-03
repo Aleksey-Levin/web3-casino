@@ -34,6 +34,17 @@ func _deploy(data interface{}, isUpdate bool) {
 func RollSlot(bet int) {
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
+
+	if bet <= 0 {
+		panic("Invalid bet amount")
+	}
+	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
+	playerBalance := contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+
+	if playerBalance < bet {
+		panic("Insufficient funds")
+	}
+
 	res := roll()
 	if (res == 0){
 		changePlayerBalance(ctx, playerOwner, -bet)
@@ -48,14 +59,17 @@ func roll() int {
 	firstWheel := (runtime.GetRandom() % 8) + 1
 	runtime.Notify("wheelNumber", 1)
         runtime.Notify("value", firstWheel)
+	runtime.Log("WheelNumber 1, value="+string(firstWheel))
 
 	secondWheel := (runtime.GetRandom() % 8) + 1
 	runtime.Notify("wheelNumber", 2)
         runtime.Notify("value", secondWheel)
+	runtime.Log("WheelNumber 2, value="+string(secondWheel))
 
 	thirdWheel := (runtime.GetRandom() % 8) + 1
 	runtime.Notify("wheelNumber", 3)
         runtime.Notify("value", thirdWheel)
+	runtime.Log("WheelNumber 3, value="+string(thirdWheel))
 
 	if (firstWheel == secondWheel && firstWheel == thirdWheel){
 		return firstWheel

@@ -33,6 +33,17 @@ func _deploy(data interface{}, isUpdate bool) {
 func PlayCraps(bet int, firstSum int, secondSum int) {
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
+
+	if bet <= 0 {
+		panic("Invalid bet amount")
+	}
+
+	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
+	playerBalance := contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+	if playerBalance < bet {
+		panic("Insufficient funds")
+	}
+
 	isWin := isWinner(firstSum, secondSum)
 	if (isWin){
 		changePlayerBalance(ctx, playerOwner, bet)
@@ -49,6 +60,7 @@ func isWinner(firstSum int, secondSum int) bool {
 	sum := 0
 	for i:=0; i<2; i++ {
 		crap := (runtime.GetRandom() % 6) + 1
+		runtime.Log("Crup number " + string(i+1) + " Rundom number " + string(crap))
 		runtime.Notify("Crup number", i+1)
 		runtime.Notify("Random number", crap)
 		sum += crap
