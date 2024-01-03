@@ -1,7 +1,6 @@
 package Craps
 
 import (
-
 	"github.com/nspcc-dev/neo-go/pkg/interop"
 	"github.com/nspcc-dev/neo-go/pkg/interop/contract"
 	"github.com/nspcc-dev/neo-go/pkg/interop/runtime"
@@ -9,8 +8,6 @@ import (
 )
 
 const (
-	gasDecimals    = 1_0000_0000
-	initialBalance = 3000
 	zaCoinHashKey = "zaCoinHash"
 )
 
@@ -36,6 +33,17 @@ func _deploy(data interface{}, isUpdate bool) {
 func PlayCraps(bet int, firstSum int, secondSum int) {
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
+
+	if bet <= 0 {
+		panic("Invalid bet amount")
+	}
+
+	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
+	playerBalance := contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+	if playerBalance < bet {
+		panic("Insufficient funds")
+	}
+
 	isWin := isWinner(firstSum, secondSum)
 	if (isWin){
 		changePlayerBalance(ctx, playerOwner, bet)
@@ -45,17 +53,16 @@ func PlayCraps(bet int, firstSum int, secondSum int) {
 }
 
 func isWinner(firstSum int, secondSum int) bool {
-	crupNumber:="Crup number: "
-	rundomNumber:=" Random number: "
-	if (!((firstSum >= 3 && firstSum <= 18) && (secondSum >= 3 && firstSum <= 18))){
-		panic("first and second sum should be from 3 to 18")
+	if (!((firstSum >= 2 && firstSum <= 12) && (secondSum >= 2 && firstSum <= 12))){
+		panic("first and second sum should be from 2 to 12")
 	}
 
 	sum := 0
-
-	for i:=0; i<3; i++ {
+	for i:=0; i<2; i++ {
 		crap := (runtime.GetRandom() % 6) + 1
-        	runtime.Notify(crupNumber, i+1, rundomNumber, crap)
+		runtime.Log("Crup number " + string(i+1) + " Rundom number " + string(crap))
+		runtime.Notify("Crup number", i+1)
+		runtime.Notify("Random number", crap)
 		sum += crap
 	}
 

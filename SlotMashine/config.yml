@@ -1,0 +1,16 @@
+name: SlotMashine
+supportedstandards: []
+events:
+  - name: "wheelNumber"
+    parameters:
+      - name: "int"
+        type: "Integer"
+  - name: "value"
+    parameters:
+      - name: "int"
+        type: "Integer"
+permissions:
+    - methods: '*'
+      events:
+        - "wheelNumber"
+        - "value"
