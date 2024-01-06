@@ -4,7 +4,7 @@ import WalletIcon from "../../icons/WalletIcon";
 
 export const AppNav = () => {
     return (
-        <div style={{ height: 'max-content' }} className="bg-[#30333C] text-white py-2 z-50">
+        <div style={{ height: 'max-content' }} className="bg-[#30333C] text-white py-2 z-50 sticky top-0">
             <div className="container mx-auto">
                 <div className="flex flex-row justify-between">
                     <a href="/" className="flex flex-row items-center">
