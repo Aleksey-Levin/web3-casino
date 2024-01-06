@@ -27,7 +27,7 @@ export const MainPage = () => {
                     <div className="flex flex-row items-center gap-2">
                         <GamepadIcon />
                         <span className="font-bold">
-                            In-House games
+                            Games
                         </span>
                     </div>
                     <div className="flex flex-row gap-2 items-center">
@@ -54,32 +54,8 @@ export const MainPage = () => {
                         </div>
                         <div className="flex flex-col h-full justify-between">
                             <div className="flex flex-row justify-between min-w-[200px]">
-                                <div className="flex flex-col">
-                                    <span className="text-xl font-bold">DICE</span>
-                                    <div className="text-gray-400 font-medium">562 online</div>
-                                </div>
+                                <span className="text-xl font-bold">DICE</span>
                                 <a href="/dice" className="min-w-[100px] max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center">Play now</a>
-                            </div>
-                            <div className="flex flex-row justify-between">
-                                <div className="flex flex-col">
-                                    <span className="text-gray-400 font-medium text-[14px]">
-                                        Hourly drop
-                                    </span>
-                                    <div className="flex flex-row gap-2">
-                                        <span className="font-medium">217.32</span>
-                                        <CoinIcon />
-                                    </div>
-                                </div>
-                                <div className="w-[2px] bg-slate-400"></div>
-                                <div className="flex flex-col">
-                                    <span className="text-gray-400 font-medium text-[14px]">
-                                        Daily drop
-                                    </span>
-                                    <div className="flex flex-row gap-2">
-                                        <span className="font-medium">217.32</span>
-                                        <CoinIcon />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,30 +72,8 @@ export const MainPage = () => {
                             <div className="flex flex-row justify-between min-w-[200px]">
                                 <div className="flex flex-col">
                                     <span className="text-xl font-bold uppercase">Rock paper scissors</span>
-                                    <div className="text-gray-400 font-medium">689 online</div>
                                 </div>
                                 <button className="bg-blue-500 min-w-[103px] max-h-[45px] rounded-[10px] border border-blue-400 font-bold px-3 inline-block">Play now</button>
-                            </div>
-                            <div className="flex flex-row justify-between">
-                                <div className="flex flex-col">
-                                    <span className="text-gray-400 font-medium text-[14px]">
-                                        Hourly drop
-                                    </span>
-                                    <div className="flex flex-row gap-2">
-                                        <span className="font-medium">367.27</span>
-                                        <CoinIcon />
-                                    </div>
-                                </div>
-                                <div className="w-[2px] bg-slate-400"></div>
-                                <div className="flex flex-col">
-                                    <span className="text-gray-400 font-medium text-[14px]">
-                                        Daily drop
-                                    </span>
-                                    <div className="flex flex-row gap-2">
-                                        <span className="font-medium">1,984.18</span>
-                                        <CoinIcon />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,30 +89,8 @@ export const MainPage = () => {
                             <div className="flex flex-row justify-between min-w-[200px]">
                                 <div className="flex flex-col">
                                     <span className="text-xl font-bold uppercase">Slot machine</span>
-                                    <div className="text-gray-400 font-medium">315 online</div>
                                 </div>
                                 <button className="bg-blue-500 min-w-[103px] max-h-[45px] rounded-[10px] border border-blue-400 font-bold px-3 inline-block">Play now</button>
-                            </div>
-                            <div className="flex flex-row justify-between">
-                                <div className="flex flex-col">
-                                    <span className="text-gray-400 font-medium text-[14px]">
-                                        Hourly drop
-                                    </span>
-                                    <div className="flex flex-row gap-2">
-                                        <span className="font-medium">198.47</span>
-                                        <CoinIcon />
-                                    </div>
-                                </div>
-                                <div className="w-[2px] bg-slate-400"></div>
-                                <div className="flex flex-col">
-                                    <span className="text-gray-400 font-medium text-[14px]">
-                                        Daily drop
-                                    </span>
-                                    <div className="flex flex-row gap-2">
-                                        <span className="font-medium">1,487.28</span>
-                                        <CoinIcon />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
