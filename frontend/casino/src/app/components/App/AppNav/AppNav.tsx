@@ -1,8 +1,5 @@
 import CoinIcon from "../../icons/CoinIcon";
-import GameIcon from "../../icons/GameIcon";
 import ProfileIcon from "../../icons/ProfileIcon";
-import SearchIcon from "../../icons/SearchIcon";
-import SportIcon from "../../icons/SportIcon";
 import WalletIcon from "../../icons/WalletIcon";
 
 export const AppNav = () => {
