@@ -21,7 +21,7 @@ func _deploy(data interface{}, isUpdate bool) {
 	})
 
 	if len(args.zaCoinHash) != interop.Hash160Len {
-		panic("invalid hash of zaCoin contract")
+		panic("Invalid hash of zaCoin contract")
 	}
 
 	ctx := storage.GetContext()
