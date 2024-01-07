@@ -9,11 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          path: frontend/casino
       - name: Starting NodeJs ${{ matrix.node-version}}
         uses: actions/setup-node@v3
         with:
+          path: frontend/casino
           node-version: ${{ matrix.node-version }}
       - name: install modules
+        with:
+          path: frontend/casino
         run: yarn
       - name: build project
+        with:
+          path: frontend/casino
         run: yarn build
