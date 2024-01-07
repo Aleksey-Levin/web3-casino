@@ -1,4 +1,3 @@
-import CoinIcon from "../../components/icons/CoinIcon";
 import ContainerLayout from "../../utils/ContainerLayout";
 import GamepadIcon from "../../components/icons/GamepadIcon";
 
