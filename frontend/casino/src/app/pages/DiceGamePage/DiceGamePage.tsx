@@ -38,10 +38,10 @@ export const DiceGamePage = observer(() => {
                     <img src={diceImg} alt="Dice" />
                 </div>
                 {/* Кнопка для бека */}
-                <DicePlayButton onLoading={onLoading} onSuccess={onSuccess} value={5}/>
+                <DicePlayButton onLoading={onLoading} onSuccess={onSuccess} value={5} secondValue={6}/>
                 <div className="flex flex-row justify-around w-full font-semibold">
                     <div className="bg-gray-500 rounded-[30px] py-5 px-10 text-2xl">
-                        Вы загадали: 5
+                        Вы загадали: 5 и 6
                     </div>
                     {(diceValue && !isLoading) && <div className="bg-gray-800 rounded-[30px] py-5 px-10 text-2xl">
                         Выпало число: {diceValue}
