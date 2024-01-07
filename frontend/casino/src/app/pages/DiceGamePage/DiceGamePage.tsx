@@ -1,5 +1,6 @@
 import ContainerLayout from "../../utils/ContainerLayout"
 import { DicePlayButton } from "../../components/web3/DicePlayButton"
+import diceImg from '../../../assets/img/dice-img.png'
 
 export const DiceGamePage = () => {
     return (
@@ -12,8 +13,8 @@ export const DiceGamePage = () => {
                     <div className="absolute w-[710px] h-[456px] bg-lime-800 rounded-[187px] blur-[300px]" />
                 </div>
                 <div className="flex flex-row min-w-full justify-center gap-10 relative mt-12">
-                    <img src="src/assets/img/dice-img.png" alt="Dice" />
-                    <img src="src/assets/img/dice-img.png" alt="Dice" />
+                    <img src={diceImg} alt="Dice" />
+                    <img src={diceImg} alt="Dice" />
                 </div>
                 {/* Кнопка для бека */}
                 <DicePlayButton />
