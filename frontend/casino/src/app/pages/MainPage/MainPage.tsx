@@ -1,5 +1,6 @@
 import ContainerLayout from "../../utils/ContainerLayout";
 import GamepadIcon from "../../components/icons/GamepadIcon";
+import {Link} from "react-router-dom";
 
 export const MainPage = () => {
     return (
@@ -54,7 +55,7 @@ export const MainPage = () => {
                         <div className="flex flex-col h-full justify-between">
                             <div className="flex flex-row justify-between min-w-[200px]">
                                 <span className="text-xl font-bold">DICE</span>
-                                <a href="/dice" className="min-w-[100px] max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center">Play now</a>
+                                <Link to="dice" className="min-w-[100px] max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center">Play now</Link>
                             </div>
                         </div>
                     </div>
