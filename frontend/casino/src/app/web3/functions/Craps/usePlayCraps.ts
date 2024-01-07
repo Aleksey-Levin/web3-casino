@@ -1,34 +1,22 @@
 import {useWalletConnect} from "@cityofzion/wallet-connect-sdk-react";
 import {useCallback} from "react";
 import {useGetResult} from "../utils/useGetResult.ts";
-import {useStatusState} from "../../../hooks/useStatusState.ts";
-import { config } from "../config/config.ts";
+import {config} from "../config/config.ts";
 
 export const usePlayCraps = () => {
     const wcSdk = useWalletConnect()
-    const { getResult } = useGetResult()
-    const { statuses, wrapPromise } = useStatusState()
+    const { getResult, ...statuses } = useGetResult()
 
-    const playCraps = useCallback(wrapPromise(async () => {
-        // const resp = await wcSdk.invokeFunction({
-        //     invocations: [{
-        //         scriptHash: '270c825a5ac041e18be45074bbb942255164a214',
-        //         operation: 'balanceOf',
-        //         args: [
-        //             { type: 'Hash160', value: 'NQCLAHuu4umnR99KB5m7U8ppJFtWqhw6DS' },
-        //         ]
-        //     }],
-        //     signers: [{
-        //         scopes: 'Global',
-        //     }]
-        // })
+    const playCraps = useCallback(async (value: number, secondValue: number) => {
+        console.log(config.craps.contractAddress)
         const resp = await wcSdk.invokeFunction({
             invocations: [{
                 scriptHash: config.craps.contractAddress,
-                operation: 'playRoulette',
+                operation: 'playCraps',
                 args: [
                     { type: 'Integer', value: '40' },
-                    { type: 'Integer', value: '3' },
+                    { type: 'Integer', value: value.toString() },
+                    { type: 'Integer', value: secondValue.toString() },
                 ]
             }],
             signers: [{
@@ -36,9 +24,8 @@ export const usePlayCraps = () => {
             }]
         })
         console.log(resp)
-        const result = await getResult(resp)
-        console.log(result)
-    }), [wcSdk, getResult, wrapPromise])
+        await getResult(resp, 'rouletteNumber')
+    }, [wcSdk, getResult])
 
     return {
         playCraps,
