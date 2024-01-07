@@ -1,0 +1,6 @@
+name: Exchanger
+sourceurl: http://example.com/
+safemethods: []
+supportedstandards: []
+permissions:
+    - methods: '*'
