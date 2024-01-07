@@ -1,5 +1,15 @@
 name: Craps
 supportedstandards: []
 events:
+  - name: "Crup number"
+    parameters:
+      - name: "int"
+        type: "Integer"
+  - name: "Random number"
+    parameters:
+      - name: "int"
+        type: "Integer"
 permissions:
-    - methods: '*'
+  - methods: '*'
+    events:
+      - "Crup number"

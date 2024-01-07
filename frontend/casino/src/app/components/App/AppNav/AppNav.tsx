@@ -36,6 +36,5 @@ export const AppNav = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        )
 };

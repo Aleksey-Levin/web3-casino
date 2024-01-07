@@ -1,0 +1,11 @@
+name: Roulette
+supportedstandards: []
+events:
+  - name: "rouletteNumber"
+    parameters:
+      - name: "int"
+        type: "Integer"
+permissions:
+  - methods: '*'
+    events:
+      - "rouletteNumber"
