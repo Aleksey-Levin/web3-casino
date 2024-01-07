@@ -52,6 +52,8 @@ func PlayRoulette(bet int, selectedNumber int) {
 	} else {
 		changePlayerBalance(ctx, playerOwner, -bet)
 	}
+	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+	runtime.Notify("playerBalance", playerBalance)
 }
 
 func isWinner(selectedNumber int) bool {

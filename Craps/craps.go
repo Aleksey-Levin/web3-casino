@@ -16,7 +16,6 @@ func _deploy(data interface{}, isUpdate bool) {
 		return
 	}
 
-	// Parse hash of forint contract from incoming data
 	args := data.(struct {
 		zaCoinHash interop.Hash160
 	})
@@ -50,6 +49,8 @@ func PlayCraps(bet int, firstSum int, secondSum int) {
 	} else {
 		changePlayerBalance(ctx, playerOwner, -bet)
 	}
+	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+        runtime.Notify("playerBalance", playerBalance)
 }
 
 func isWinner(firstSum int, secondSum int) bool {
@@ -87,15 +88,13 @@ func changePlayerBalance(ctx storage.Context, playerOwner interop.Hash160, balan
 	var from, to interop.Hash160
 	var transferAmount int
 	if balanceChange > 0 {
-		// Transfer funds from contract to player owner
 		from = playerContract
 		to = playerOwner
 		transferAmount = balanceChange
 	} else {
-		// Transfer funds from player owner to contract
 		from = playerOwner
 		to = playerContract
-		transferAmount = -balanceChange // We flip sender/receiver, but keep amount positive
+		transferAmount = -balanceChange
 	}
 
 	transferred := contract.Call(zaCoinHash, "transfer", contract.All, from, to, transferAmount, nil).(bool)
