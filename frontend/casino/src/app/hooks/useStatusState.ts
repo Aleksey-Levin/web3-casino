@@ -1,10 +1,7 @@
 import { useCallback, useState } from 'react'
-import { useAccount } from 'wagmi'
 import {stringifyError} from "../utils/error/stringifyError.ts";
 
 export function useStatusState<ResultType, Arguments = void>() {
-    const { isConnected } = useAccount()
-
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string>()
     const [result, setResult] = useState<ResultType>()
@@ -26,7 +23,7 @@ export function useStatusState<ResultType, Arguments = void>() {
                 throw err
             }
         }
-    }, [isConnected])
+    }, [])
 
     return {
         statuses: {

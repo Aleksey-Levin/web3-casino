@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import {IGetResult} from "../web3/functions/utils/useGetResult.ts";
 
-const useIntervalAsync = <R = unknown>(fn: (tx: string) => Promise<R>, ms: number) => {
+const useIntervalAsync = <R = unknown>(fn: ({tx, notificationKey}: IGetResult) => Promise<R>, ms: number) => {
     const runningCount = useRef(0)
     const timeout = useRef<number>()
     const mountedRef = useRef(false)
@@ -17,9 +18,9 @@ const useIntervalAsync = <R = unknown>(fn: (tx: string) => Promise<R>, ms: numbe
         [ms],
     )
 
-    const run = useCallback(async (tx: string) => {
+    const run = useCallback(async (tx: string, notificationKey?: string) => {
         runningCount.current += 1
-        const result = await fn(tx)
+        const result = await fn({tx, notificationKey})
         runningCount.current -= 1
 
         next(run)
