@@ -7,7 +7,6 @@ import (
 )
 
 func getToken() Token {
-	// Owner of the wallet is wallets/game-wallet.json нету еще
 	owner := address.ToHash160("NXbLSnHA8dNuMUPUSNNivx7XFucN1w5bRq")
 	token := Token{
 		Name:           "ZaCoin",
@@ -53,6 +52,6 @@ func Mint(to interop.Hash160) {
 	ctx := storage.GetContext()
 	minted := getToken().Mint(ctx, to)
 	if !minted {
-		panic("failed to mint initial supply")
+		panic("Failed  to mint initial supply")
 	}
 }
