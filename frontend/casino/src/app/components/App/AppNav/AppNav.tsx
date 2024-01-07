@@ -1,6 +1,6 @@
 import CoinIcon from "../../icons/CoinIcon";
 import ProfileIcon from "../../icons/ProfileIcon";
-import WalletIcon from "../../icons/WalletIcon";
+import {ConnectStateButton} from "../../../web3/connect";
 
 export const AppNav = () => {
     return (
@@ -21,13 +21,7 @@ export const AppNav = () => {
                                 {/* placeholder for balance */}
                                 <span>0.000000</span>
                             </div>
-                            <div className="flex flex-row items-center rounded-[100px] border-[2px] border-[#4F5563] bg-[#3B414F] px-[14px] py-[11px] gap-[3px] cursor-pointer">
-                                {/* todo: load from .svg file in assets */}
-                                <WalletIcon />
-                                <button>
-                                    Wallet
-                                </button>
-                            </div>
+                            <ConnectStateButton/>
                         </div>
                         <div className="flex flex-row items-center">
                             <span>Robin F.</span>
