@@ -1,8 +1,29 @@
 import ContainerLayout from "../../utils/ContainerLayout"
 import { DicePlayButton } from "../../components/web3/DicePlayButton"
 import diceImg from '../../../assets/img/dice-img.png'
+import {useState} from "react";
+import {useStores} from "../../hooks/useStores.tsx";
+import {observer} from "mobx-react-lite";
 
-export const DiceGamePage = () => {
+export const DiceGamePage = observer(() => {
+    const [diceValue, setDiceValue] = useState<string | undefined>()
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const { userStore } = useStores()
+
+    const onSuccess = (result: unknown) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        setDiceValue(result.value)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        userStore.setBalance(result.balance ?? '0')
+        setIsLoading(false)
+    }
+
+    const onLoading = () => {
+        setIsLoading(true)
+    }
+
     return (
         <ContainerLayout>
             <div className="flex flex-col items-center text-white">
@@ -17,16 +38,16 @@ export const DiceGamePage = () => {
                     <img src={diceImg} alt="Dice" />
                 </div>
                 {/* Кнопка для бека */}
-                <DicePlayButton />
+                <DicePlayButton onLoading={onLoading} onSuccess={onSuccess} value={5}/>
                 <div className="flex flex-row justify-around w-full font-semibold">
                     <div className="bg-gray-500 rounded-[30px] py-5 px-10 text-2xl">
                         Вы загадали: 5
                     </div>
-                    <div className="bg-gray-800 rounded-[30px] py-5 px-10 text-2xl">
-                        Выпало число: 5
-                    </div>
+                    {(diceValue && !isLoading) && <div className="bg-gray-800 rounded-[30px] py-5 px-10 text-2xl">
+                        Выпало число: {diceValue}
+                    </div>}
                 </div>
             </div>
         </ContainerLayout>
     )
-}
+})

@@ -2,8 +2,12 @@ import CoinIcon from "../../icons/CoinIcon";
 import ProfileIcon from "../../icons/ProfileIcon";
 import {ConnectStateButton} from "../../../web3/connect";
 import chipImg from '../../../../assets/icons/chip.png'
+import {useStores} from "../../../hooks/useStores.tsx";
+import {observer} from "mobx-react-lite";
+import {CheckBalanceButton} from "../../../web3/balance/CheckBalanceButton.tsx";
 
-export const AppNav = () => {
+export const AppNav = observer(() => {
+    const { userStore } = useStores()
     return (
         <div style={{ height: 'max-content' }} className="bg-[#30333C] text-white py-2 z-50 sticky top-0">
             <div className="container mx-auto">
@@ -20,7 +24,7 @@ export const AppNav = () => {
                             <div className="flex flex-row gap-[3px] items-center px-[15px] py-[11px]">
                                 <CoinIcon />
                                 {/* placeholder for balance */}
-                                <span>0.000000</span>
+                                {userStore.balance ? <span>{userStore.balance}</span> : <CheckBalanceButton/>}
                             </div>
                             <ConnectStateButton/>
                         </div>
@@ -33,4 +37,4 @@ export const AppNav = () => {
             </div>
         </div>
         )
-};
+})

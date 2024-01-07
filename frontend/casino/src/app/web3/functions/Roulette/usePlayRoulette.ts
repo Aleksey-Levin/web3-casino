@@ -1,15 +1,13 @@
 import {useWalletConnect} from "@cityofzion/wallet-connect-sdk-react";
 import {useCallback} from "react";
 import {useGetResult} from "../utils/useGetResult.ts";
-import {useStatusState} from "../../../hooks/useStatusState.ts";
 import {config} from "../config/config.ts";
 
 export const usePlayRoulette = () => {
     const wcSdk = useWalletConnect()
-    const { getResult } = useGetResult()
-    const { statuses, wrapPromise } = useStatusState()
+    const { getResult, ...statuses } = useGetResult()
 
-    const playRoulette = useCallback(wrapPromise(async () => {
+    const playRoulette = useCallback(async (value: number) => {
         // const resp = await wcSdk.invokeFunction({
         //     invocations: [{
         //         scriptHash: '270c825a5ac041e18be45074bbb942255164a214',
@@ -22,13 +20,14 @@ export const usePlayRoulette = () => {
         //         scopes: 'Global',
         //     }]
         // })
+        console.log(config.roulette.contractAddress)
         const resp = await wcSdk.invokeFunction({
             invocations: [{
                 scriptHash: config.roulette.contractAddress,
                 operation: 'playRoulette',
                 args: [
                     { type: 'Integer', value: '40' },
-                    { type: 'Integer', value: '3' },
+                    { type: 'Integer', value: value.toString() },
                 ]
             }],
             signers: [{
@@ -36,9 +35,8 @@ export const usePlayRoulette = () => {
             }]
         })
         console.log(resp)
-        const result = await getResult(resp)
-        console.log(result)
-    }), [wcSdk, getResult, wrapPromise])
+        await getResult(resp, 'rouletteNumber')
+    }, [wcSdk, getResult])
 
     return {
         playRoulette,
