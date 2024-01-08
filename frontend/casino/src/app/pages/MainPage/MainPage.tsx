@@ -14,15 +14,7 @@ export const MainPage = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#171A21] via-[rgba(22, 25, 32, 0.10)] to-[#171A21] via-[rgba(22,22,22,0)]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#171A21] via-[rgba(22, 25, 32, 0.10)] to-[#171A21] via-[rgba(22,22,22,0)]" />
             </div>
-            <div className="text-white text-[46px] font-bold mb-[300px] relative z-10 mt-[100px]">
-                <span>
-                    GET UP TO </span>
-                <span className="text-amber-400">$1500</span>
-                <span> BONUS
-                </span>
-                <div className="text-gray-400 text-[25px] font-bold">REGISTER AND GET YOUR BONUS</div>
-            </div>
-            <div className="w-full h-max-content bg-gray-800 rounded-[25px] p-[30px] text-white flex flex-col gap-[30px] relative z-10">
+            <div className="w-full h-max-content bg-gray-800 rounded-[25px] p-[30px] text-white flex flex-col gap-[30px] relative z-10 mt-[400px]">
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-row items-center gap-2">
                         <GamepadIcon />
