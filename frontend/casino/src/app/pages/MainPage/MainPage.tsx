@@ -71,7 +71,7 @@ export const MainPage = () => {
                         <div className="flex flex-col h-full justify-between">
                             <div className="flex flex-row justify-between min-w-[200px] my-auto">
                                 <span className="text-xl font-bold uppercase">Rock paper scissors</span>
-                                <button className="bg-blue-500 min-w-[103px] max-h-[45px] rounded-[10px] border border-blue-400 font-bold px-3 inline-block">Play now</button>
+                                <a href="/rock-paper-scissors" className="min-w-[100px]max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center py-2">Play now</a>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ export const MainPage = () => {
                         <div className="flex flex-col h-full justify-between">
                             <div className="flex flex-row justify-between min-w-[200px] my-auto">
                                 <span className="text-xl font-bold uppercase">Slot machine</span>
-                                <button className="bg-blue-500 min-w-[103px] max-h-[45px] rounded-[10px] border border-blue-400 font-bold px-3 inline-block">Play now</button>
+                                <a href="/slot" className="min-w-[100px]max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center py-2">Play now</a>
                             </div>
                         </div>
                     </div>
