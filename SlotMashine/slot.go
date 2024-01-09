@@ -17,13 +17,12 @@ func _deploy(data interface{}, isUpdate bool) {
 		return
 	}
 
-	// Parse hash of forint contract from incoming data
 	args := data.(struct {
 		zaCoinHash interop.Hash160
 	})
 
 	if len(args.zaCoinHash) != interop.Hash160Len {
-                panic("invalid hash of zaCoin contract")
+                panic("Invalid hash of zaCoin contract")
         }
 
 
@@ -34,6 +33,17 @@ func _deploy(data interface{}, isUpdate bool) {
 func RollSlot(bet int) {
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
+
+	if bet <= 0 {
+		panic("Invalid bet amount")
+	}
+	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
+	playerBalance := contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+
+	if playerBalance < bet {
+		panic("Insufficient funds")
+	}
+
 	res := roll()
 	if (res == 0){
 		changePlayerBalance(ctx, playerOwner, -bet)
@@ -41,24 +51,22 @@ func RollSlot(bet int) {
 		win := res * bet
 		changePlayerBalance(ctx, playerOwner, win)
 	}
+	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+        runtime.Notify("playerBalance", playerBalance)
 }
 
 func roll() int {
+	var result []int
+	for i:=0; i<3; i++ {
+		wheel := (runtime.GetRandom() % 8) + 1
+        	result = append(result, wheel)
+        	runtime.Log("WheelNumber=" + string(i + 1) +", value="+string(wheel))
+	}
+	runtime.Notify("SlotResult", result)
 
-	firstWheel := (runtime.GetRandom() % 8) + 1
-	runtime.Notify("wheelNumber", 1)
-        runtime.Notify("value", firstWheel)
 
-	secondWheel := (runtime.GetRandom() % 8) + 1
-	runtime.Notify("wheelNumber", 2)
-        runtime.Notify("value", secondWheel)
-
-	thirdWheel := (runtime.GetRandom() % 8) + 1
-	runtime.Notify("wheelNumber", 3)
-        runtime.Notify("value", thirdWheel)
-
-	if (firstWheel == secondWheel && firstWheel == thirdWheel){
-		return firstWheel
+	if (result[0] == result[1] && result[0] == result[2]){
+		return result[0]
 	} else {
 		return 0
 	}
@@ -72,7 +80,7 @@ func OnNEP17Payment(from interop.Hash160, amount int, data any) {
 
 	callingHash := runtime.GetCallingScriptHash()
 	if !callingHash.Equals(zaCoinHash) {
-		panic("only ZC is accepted")
+		panic("Only ZC is accepted")
 	}
 }
 
@@ -83,15 +91,13 @@ func changePlayerBalance(ctx storage.Context, playerOwner interop.Hash160, balan
 	var from, to interop.Hash160
 	var transferAmount int
 	if balanceChange > 0 {
-		// Transfer funds from contract to player owner
 		from = playerContract
 		to = playerOwner
 		transferAmount = balanceChange
 	} else {
-		// Transfer funds from player owner to contract
 		from = playerOwner
 		to = playerContract
-		transferAmount = -balanceChange // We flip sender/receiver, but keep amount positive
+		transferAmount = -balanceChange
 	}
 
 	transferred := contract.Call(zaCoinHash, "transfer", contract.All, from, to, transferAmount, nil).(bool)

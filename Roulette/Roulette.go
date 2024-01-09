@@ -21,7 +21,7 @@ func _deploy(data interface{}, isUpdate bool) {
 	})
 
 	if len(args.zaCoinHash) != interop.Hash160Len {
-		panic("Invalid hash of zaCoin contract")
+		panic("invalid hash of zaCoin contract")
 	}
 
 	ctx := storage.GetContext()
@@ -38,8 +38,8 @@ func PlayRoulette(bet int, selectedNumber int) {
 	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
 	playerBalance := contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
 	if playerBalance < bet {
-        panic("Insufficient funds lol, expected > " + string(rune(bet)) + "but balance " + string(rune(playerBalance)))
-    }
+		panic("Insufficient funds")
+	}
 
 	if selectedNumber < 1 || selectedNumber > 36 {
 		panic("Illegal number selected for roulette")
@@ -47,12 +47,13 @@ func PlayRoulette(bet int, selectedNumber int) {
 
 	isWin := isWinner(selectedNumber)
 	if isWin {
-	    panic("You win!")
 		winAmount := calculateWinAmount(bet, selectedNumber)
 		changePlayerBalance(ctx, playerOwner, winAmount)
 	} else {
 		changePlayerBalance(ctx, playerOwner, -bet)
 	}
+	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+	runtime.Notify("playerBalance", playerBalance)
 }
 
 func isWinner(selectedNumber int) bool {

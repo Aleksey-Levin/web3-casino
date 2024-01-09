@@ -1,0 +1,5 @@
+name: Exchanger
+supportedstandards: []
+events:
+permissions:
+  - methods: "*"
