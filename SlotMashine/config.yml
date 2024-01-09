@@ -1,16 +1,16 @@
 name: SlotMashine
 supportedstandards: []
 events:
-  - name: "SlotResult"
+  - name: SlotResult
     parameters:
-      - name: "array"
-        type: "Array"
-  - name: "playerBalance"
+      - name: array
+        type: Array
+  - name: playerBalance
     parameters:
-      - name: "int"
-        type: "Integer"
+      - name: int
+        type: Integer
 permissions:
     - methods: '*'
       events:
-        - "SlotResult"
-        - "playerBalance"
+        - SlotResult
+        - playerBalance

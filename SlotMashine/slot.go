@@ -56,10 +56,10 @@ func RollSlot(bet int) {
 }
 
 func roll() int {
-	var result [3]int
+	var result []int
 	for i:=0; i<3; i++ {
 		wheel := (runtime.GetRandom() % 8) + 1
-        	result[i] = wheel
+        	result = append(result, wheel)
         	runtime.Log("WheelNumber=" + string(i + 1) +", value="+string(wheel))
 	}
 	runtime.Notify("SlotResult", result)

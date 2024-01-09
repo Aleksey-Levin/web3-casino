@@ -68,6 +68,8 @@ func OnNEP17Payment(from interop.Hash160, amount int, data any) {
 
 func gasTransfer(playerOwner interop.Hash160, gasCount int) {
 	contractHash := runtime.GetExecutingScriptHash()
+
+
         transferredGas := gas.Transfer(playerOwner, contractHash, gasCount, nil)
 
         if !transferredGas {
