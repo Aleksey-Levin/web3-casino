@@ -1,31 +1,67 @@
 import ContainerLayout from "../../utils/ContainerLayout"
-import { RPSPlayButton } from "../../components/web3/RPSPlayButton"
+import PropTypes from 'prop-types';
+import Reel from '../../components/App/Slot/Reel';
+import { useEffect, useState } from 'react';
+import { RPSPlayButton } from '../../components/web3/RPSPlayButton';
 
 export const SlotGamePage = () => {
+    const [isHorizontal, setIsHorizontal] = useState(false)
+    const [cellCount, setCellCount] = useState(7)
+    const [rng, setRng] = useState(false)
+    const [rngReverse, setRngReverse] = useState(false)
+
+    const mql = window.matchMedia('(orientation: portrait)')
+
+    mql.onchange = (e) => {
+        if (e.matches) {
+            setIsHorizontal(true)
+        } else {
+            setIsHorizontal(false)
+        }
+    }
+
+    const handleRng = () => {
+        setRng(!rng)
+    }
+    const handleRngReverse = () => {
+        setRngReverse(!rngReverse)
+    }
+
+    useEffect(() => {
+        if (mql.matches) {
+            setIsHorizontal(true)
+        } else {
+            setIsHorizontal(false)
+        }
+    }, [])
     return (
         <ContainerLayout>
-            <div className="flex flex-col items-center text-white">
-                <p className="text-[46px] font-bold uppercase">
-                    брось кубики онлайн!
-                </p>
-                <div className="justify-center flex pointer-events-none">
-                    <div className="absolute w-[710px] h-[456px] bg-lime-800 rounded-[187px] blur-[300px]" />
-                </div>
-                <div className="flex flex-row min-w-full justify-center gap-10 relative mt-12">
-                    <img src="src/assets/img/dice-img.png" alt="Dice" />
-                    <img src="src/assets/img/dice-img.png" alt="Dice" />
-                </div>
-                {/* Кнопка для бека */}
-                <RPSPlayButton />
-                <div className="flex flex-row justify-around w-full font-semibold">
-                    <div className="bg-gray-500 rounded-[30px] py-5 px-10 text-2xl">
-                        Вы загадали: 5
+            <div className="flex flex-row gap-4">
+                <div className="max-h-[180px] bg-green-700 flex flex-col justify-between shadow text-white text-2xl font-bold py-4 px-6 rounded-xl">
+                    <div className="flex flex-col">
+                        <p>выигрыш:</p><span className="text-yellow-400">5000</span>
                     </div>
-                    <div className="bg-gray-800 rounded-[30px] py-5 px-10 text-2xl">
-                        Выпало число: 5
+                    <div className="flex flex-col">
+                        <p>ставка:</p><span className="text-yellow-400">10 000</span>
                     </div>
+                </div>
+
+                <div className="min-h-[800px] w-full bg-fuchsia-600 flex items-center justify-center">
+                    <div className="flex flex-row portrait:flex-col justify-center items-center my-auto">
+                        <Reel rng={rng} rngReverse={rngReverse} cellCount={cellCount} isHorizontal={isHorizontal} />
+                        <Reel rng={rng} rngReverse={rngReverse} cellCount={cellCount} isHorizontal={isHorizontal} />
+                        <Reel rng={rng} rngReverse={rngReverse} cellCount={cellCount} isHorizontal={isHorizontal} />
+                    </div>
+                </div>
+
+                <div className="max-w-[100px]">
+                    <RPSPlayButton />
                 </div>
             </div>
         </ContainerLayout>
-    )
+    );
 }
+
+SlotGamePage.propTypes = {
+    cellCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+};
