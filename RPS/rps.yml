@@ -1,0 +1,21 @@
+name: rps
+supportedstandards: []
+events:
+  - name: "computerChoice"
+    parameters:
+      - name: "int"
+        type: "Integer"
+  - name: "playerChoice"
+    parameters:
+      - name: "int"
+        type: "Integer"
+  - name: "playerBalance"
+    parameters:
+      - name: "int"
+        type: "Integer"
+permissions:
+  - methods: '*'
+    events:
+      - "computerChoice"
+      - "playerChoice"
+      - "playerBalance"

@@ -1,4 +1,4 @@
-package RPS
+package rps
 
 import (
 	"github.com/nspcc-dev/neo-go/pkg/interop"
@@ -34,16 +34,26 @@ func _deploy(data interface{}, isUpdate bool) {
 	storage.Put(ctx, zaCoinHashKey, args.zaCoinHash)
 }
 
-func PlayRPS(playerChoice string, ctx storage.Context, playerOwner interop.Hash160, bet int) {
+func PlayRPS(playerChoice string, bet int) {
+
+	ctx := storage.GetContext()
+	playerOwner := runtime.GetScriptContainer().Sender
+
+	if bet <= 0 {
+		panic("Invalid bet amount")
+	}
+	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
+	playerBalance := contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+	if playerBalance < bet {
+		panic("Insufficient funds")
+	}
 
 	if playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors" {
 		panic("invalid player choice")
 	}
-	if bet <= 0 {
-		panic("bet must be positive")
-	}
 
 	computerChoice := (runtime.GetRandom() % 3) + 1
+	runtime.Notify("computerChoice", computerChoice)
 
 	var computerChoiceString string
 	switch computerChoice {
@@ -64,6 +74,9 @@ func PlayRPS(playerChoice string, ctx storage.Context, playerOwner interop.Hash1
 	} else {
 		panic("player lost: player chose " + playerChoice + ", computer chose " + computerChoiceString)
 	}
+
+	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
+	runtime.Notify("playerBalance", playerBalance)
 }
 
 func isWinner(playerChoice, computerChoice string) Result {
