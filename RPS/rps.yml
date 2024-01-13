@@ -1,21 +1,16 @@
 name: rps
 supportedstandards: []
 events:
-  - name: "computerChoice"
+  - name: computerChoice
     parameters:
-      - name: "int"
-        type: "Integer"
-  - name: "playerChoice"
+      - name: str
+        type: String
+  - name: playerBalance
     parameters:
-      - name: "int"
-        type: "Integer"
-  - name: "playerBalance"
-    parameters:
-      - name: "int"
-        type: "Integer"
+      - name: int
+        type: Integer
 permissions:
   - methods: '*'
     events:
-      - "computerChoice"
-      - "playerChoice"
-      - "playerBalance"
+      - computerChoice
+      - playerBalance

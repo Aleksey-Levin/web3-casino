@@ -27,7 +27,7 @@ func _deploy(data interface{}, isUpdate bool) {
 	})
 
 	if len(args.zaCoinHash) != interop.Hash160Len {
-		panic("invalid hash of zaCoin contract")
+		panic("Invalid hash of zaCoin contract")
 	}
 
 	ctx := storage.GetContext()
@@ -53,7 +53,6 @@ func PlayRPS(playerChoice string, bet int) {
 	}
 
 	computerChoice := (runtime.GetRandom() % 3) + 1
-	runtime.Notify("computerChoice", computerChoice)
 
 	var computerChoiceString string
 	switch computerChoice {
@@ -65,14 +64,16 @@ func PlayRPS(playerChoice string, bet int) {
 		computerChoiceString = "scissors"
 	}
 
+	runtime.Notify("computerChoice", computerChoiceString)
+
 	result := isWinner(playerChoice, computerChoiceString)
 
 	if result.tie {
-		panic("game tied: player chose " + playerChoice + ", computer chose " + computerChoiceString)
+		runtime.Log("game tied: player chose " + playerChoice + ", computer chose " + computerChoiceString)
 	} else if result.win {
 		changePlayerBalance(ctx, playerOwner, bet)
 	} else {
-		panic("player lost: player chose " + playerChoice + ", computer chose " + computerChoiceString)
+		runtime.Log("player lost: player chose " + playerChoice + ", computer chose " + computerChoiceString)
 	}
 
 	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
