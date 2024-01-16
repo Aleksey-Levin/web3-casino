@@ -1,7 +1,6 @@
 package RPS
 
 import (
-
 	"github.com/nspcc-dev/neo-go/pkg/interop"
 	"github.com/nspcc-dev/neo-go/pkg/interop/contract"
 	"github.com/nspcc-dev/neo-go/pkg/interop/runtime"
@@ -9,14 +8,12 @@ import (
 )
 
 const (
-	gasDecimals    = 1_0000_0000
-	initialBalance = 3000
 	zaCoinHashKey = "zaCoinHash"
 )
 
 type Result struct {
-	win bool
-	tie bool
+	win  bool
+	tie  bool
 	lose bool
 }
 
@@ -25,63 +22,70 @@ func _deploy(data interface{}, isUpdate bool) {
 		return
 	}
 
-	// Parse hash of forint contract from incoming data
 	args := data.(struct {
 		zaCoinHash interop.Hash160
 	})
 
 	if len(args.zaCoinHash) != interop.Hash160Len {
-                panic("invalid hash of zaCoin contract")
-        }
-
+		panic("invalid hash of zaCoin contract")
+	}
 
 	ctx := storage.GetContext()
 	storage.Put(ctx, zaCoinHashKey, args.zaCoinHash)
 }
 
-func PlayRPS(playerChoice string) {
-	
-	computerChoice := (runtime.GetRandom() % 3) + 1
-	if computerChoice == 1 {
-		computerChoice := "rock"
-	} else if computerChoice == 2 {
-		computerChoice := "paper"
-	} else {
-		computerChoice := "scissors"
+func PlayRPS(playerChoice string, ctx storage.Context, playerOwner interop.Hash160, bet int) {
+
+	if playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors" {
+		panic("invalid player choice")
+	}
+	if bet <= 0 {
+		panic("bet must be positive")
 	}
 
-	result := isWinner(playerChoice, computerChoice)
+	computerChoice := (runtime.GetRandom() % 3) + 1
 
-    if result.tie {
-		return
-    } else if result.win {
-        changePlayerBalance(ctx, playerOwner, bet)
-    } else {
-        changePlayerBalance(ctx, playerOwner, -bet)
-    }
+	var computerChoiceString string
+	switch computerChoice {
+	case 0:
+		computerChoiceString = "rock"
+	case 1:
+		computerChoiceString = "paper"
+	case 2:
+		computerChoiceString = "scissors"
+	}
+
+	result := isWinner(playerChoice, computerChoiceString)
+
+	if result.tie {
+		panic("game tied: player chose " + playerChoice + ", computer chose " + computerChoiceString)
+	} else if result.win {
+		changePlayerBalance(ctx, playerOwner, bet)
+	} else {
+		panic("player lost: player chose " + playerChoice + ", computer chose " + computerChoiceString)
+	}
 }
 
 func isWinner(playerChoice, computerChoice string) Result {
 
 	if playerChoice == computerChoice {
-        return Result{tie: true}
-    }
+		return Result{tie: true}
+	}
 
-    if playerChoice == "rock" && computerChoice == "scissors" {
-        return Result{win: true}
-    }
+	if playerChoice == "rock" && computerChoice == "scissors" {
+		return Result{win: true}
+	}
 
-    if playerChoice == "scissors" && computerChoice == "paper" {
-        return Result{win: true}
-    }
+	if playerChoice == "scissors" && computerChoice == "paper" {
+		return Result{win: true}
+	}
 
-    if playerChoice == "paper" && computerChoice == "rock" {
-        return Result{win: true}
-    }
+	if playerChoice == "paper" && computerChoice == "rock" {
+		return Result{win: true}
+	}
 
-    return Result{lose: true}
+	return Result{lose: true}
 }
-
 
 func OnNEP17Payment(from interop.Hash160, amount int, data any) {
 	ctx := storage.GetContext()
@@ -100,15 +104,13 @@ func changePlayerBalance(ctx storage.Context, playerOwner interop.Hash160, balan
 	var from, to interop.Hash160
 	var transferAmount int
 	if balanceChange > 0 {
-		// Transfer funds from contract to player owner
 		from = playerContract
 		to = playerOwner
 		transferAmount = balanceChange
 	} else {
-		// Transfer funds from player owner to contract
 		from = playerOwner
 		to = playerContract
-		transferAmount = -balanceChange // We flip sender/receiver, but keep amount positive
+		transferAmount = -balanceChange
 	}
 
 	transferred := contract.Call(zaCoinHash, "transfer", contract.All, from, to, transferAmount, nil).(bool)

@@ -1,13 +1,17 @@
-import CoinIcon from "../../components/icons/CoinIcon";
 import ContainerLayout from "../../utils/ContainerLayout";
 import GamepadIcon from "../../components/icons/GamepadIcon";
+import {Link} from "react-router-dom";
+import casinoBg from '../../../assets/img/casino-bg-image.png'
+import diceSmall from '../../../assets/img/dices-small.png'
+import rpsSmall from '../../../assets/img/rps-small.png'
+import slotMachine from '../../../assets/img/slot-machine-small.png'
 
 export const MainPage = () => {
     return (
         <ContainerLayout>
             <div className="absolute w-[1235px] h-[629px] overflow-hidden">
                 <img
-                    src="src/assets/img/casino-bg-image.png"
+                    src={casinoBg}
                     alt="Icon"
                     className="w-full h-full object-cover filter brightness-80 blur-[4px]"
                 />
@@ -39,7 +43,7 @@ export const MainPage = () => {
                     <div className="w-[374px] h-[187.35px] bg-[#323846] rounded-[23px] border-2 border-gray-700 flex flex-row items-center justify-between px-4 py-6 gap-3">
                         <div className="rounded-full bg-neutral-800 inline-block">
                             <img
-                                src="src/assets/img/dices-small.png"
+                                src={diceSmall}
                                 alt="Icon"
                                 className="object-cover"
                             />
@@ -47,7 +51,7 @@ export const MainPage = () => {
                         <div className="flex flex-col h-full justify-between">
                             <div className="flex flex-row justify-between min-w-[200px] my-auto items-center">
                                 <span className="text-xl font-bold">DICE</span>
-                                <a href="/dice" className="min-w-[100px]max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center py-2">Play now</a>
+                                <Link to="dice" className="min-w-[100px] max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center">Play now</Link>
                             </div>
                         </div>
                     </div>
@@ -55,7 +59,7 @@ export const MainPage = () => {
                     <div className="w-[404px] h-[187.35px] bg-[#323846] rounded-[23px] border-2 border-gray-700 flex flex-row items-center justify-between px-4 py-6 gap-3">
                         <div className="rounded-full w-[140px] bg-neutral-800 inline-block">
                             <img
-                                src="src/assets/img/rps-small.png"
+                                src={rpsSmall}
                                 alt="Icon"
                                 className="object-cover"
                             />
@@ -71,7 +75,7 @@ export const MainPage = () => {
                     <div className="w-[374px] h-[187.35px] bg-[#323846] rounded-[23px] border-2 border-gray-700 flex flex-row items-center justify-between px-4 py-6 gap-3">
                         <div className="rounded-full bg-neutral-800 inline-block">
                             <img
-                                src="src/assets/img/slot-machine-small.png"
+                                src={slotMachine}
                                 alt="Icon"
                                 className="object-cover"
                             />
