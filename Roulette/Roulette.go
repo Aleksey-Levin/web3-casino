@@ -31,6 +31,7 @@ func _deploy(data interface{}, isUpdate bool) {
 func PlayRoulette(bet int, selectedNumber int) {
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
+	playerContract := runtime.GetExecutingScriptHash()
 
 	if bet <= 0 {
 		panic("Invalid bet amount")
@@ -48,9 +49,11 @@ func PlayRoulette(bet int, selectedNumber int) {
 	isWin := isWinner(selectedNumber)
 	if isWin {
 		winAmount := calculateWinAmount(bet, selectedNumber)
-		changePlayerBalance(ctx, playerOwner, winAmount)
+		changePlayerBalance(zaCoinHash, playerContract, playerOwner, winAmount)
+                runtime.Notify("gameResult", int(1))
 	} else {
-		changePlayerBalance(ctx, playerOwner, -bet)
+		changePlayerBalance(zaCoinHash, playerOwner, playerContract, bet)
+                runtime.Notify("gameResult", int(0))
 	}
 	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
 	runtime.Notify("playerBalance", playerBalance)
@@ -87,24 +90,10 @@ func OnNEP17Payment(from interop.Hash160, amount int, data any) {
 	}
 }
 
-func changePlayerBalance(ctx storage.Context, playerOwner interop.Hash160, balanceChange int) {
-	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
-	playerContract := runtime.GetExecutingScriptHash()
+func changePlayerBalance(zaCoinHash interop.Hash160, sender interop.Hash160, recipient interop.Hash160, balanceChange int) {
 
-	var from, to interop.Hash160
-	var transferAmount int
-	if balanceChange > 0 {
-		from = playerContract
-		to = playerOwner
-		transferAmount = balanceChange
-	} else {
-		from = playerOwner
-		to = playerContract
-		transferAmount = -balanceChange
-	}
-
-	transferred := contract.Call(zaCoinHash, "transfer", contract.All, from, to, transferAmount, nil).(bool)
-	if !transferred {
-		panic("failed to transfer zaCoins")
-	}
+        transferred := contract.Call(zaCoinHash, "transfer", contract.All, sender, recipient, balanceChange, nil).(bool)
+        if !transferred {
+                panic("failed to transfer zaCoins")
+        }
 }

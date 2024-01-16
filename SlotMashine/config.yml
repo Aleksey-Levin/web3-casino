@@ -5,6 +5,10 @@ events:
     parameters:
       - name: array
         type: Array
+  - name: gameResult
+    parameters:
+      - name: int
+        type: Integer
   - name: playerBalance
     parameters:
       - name: int
@@ -13,4 +17,5 @@ permissions:
     - methods: '*'
       events:
         - SlotResult
+        - gameResult
         - playerBalance

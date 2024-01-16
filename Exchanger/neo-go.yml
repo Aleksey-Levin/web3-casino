@@ -1,0 +1,16 @@
+name: Exchanger
+supportedstandards: []
+events:
+  - name: "balanceAfter"
+    parameters:
+      - name: "int"
+        type: "Integer"
+  - name: "balanceUser"
+    parameters:
+      - name: "int"
+        type: "Integer"
+permissions:
+    - methods: '*'
+      events:
+        - "balanceAfter"
+        - "balanceUser"

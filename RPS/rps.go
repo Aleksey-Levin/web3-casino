@@ -11,11 +11,6 @@ const (
 	zaCoinHashKey = "zaCoinHash"
 )
 
-type Result struct {
-	win  bool
-	tie  bool
-	lose bool
-}
 
 func _deploy(data interface{}, isUpdate bool) {
 	if isUpdate {
@@ -34,10 +29,11 @@ func _deploy(data interface{}, isUpdate bool) {
 	storage.Put(ctx, zaCoinHashKey, args.zaCoinHash)
 }
 
-func PlayRPS(playerChoice string, bet int) {
+func PlayRPS(playerChoice int, bet int) {
 
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
+	playerContract := runtime.GetExecutingScriptHash()
 
 	if bet <= 0 {
 		panic("Invalid bet amount")
@@ -48,57 +44,49 @@ func PlayRPS(playerChoice string, bet int) {
 		panic("Insufficient funds")
 	}
 
-	if playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors" {
+	if playerChoice <= 0 || playerChoice > 3 {
 		panic("invalid player choice")
 	}
 
 	computerChoice := (runtime.GetRandom() % 3) + 1
+	runtime.Notify("computerChoice", computerChoice)
 
-	var computerChoiceString string
-	switch computerChoice {
-	case 0:
-		computerChoiceString = "rock"
-	case 1:
-		computerChoiceString = "paper"
-	case 2:
-		computerChoiceString = "scissors"
-	}
+	result := isWinner(playerChoice, computerChoice)
 
-	runtime.Notify("computerChoice", computerChoiceString)
-
-	result := isWinner(playerChoice, computerChoiceString)
-
-	if result.tie {
-		runtime.Log("game tied: player chose " + playerChoice + ", computer chose " + computerChoiceString)
-	} else if result.win {
-		changePlayerBalance(ctx, playerOwner, bet)
-	} else {
-		runtime.Log("player lost: player chose " + playerChoice + ", computer chose " + computerChoiceString)
+	if result == 1 {
+		changePlayerBalance(playerContract, playerOwner, bet)
+                runtime.Notify("gameResult", result)
+	} else if result == 0 {
+		changePlayerBalance(playerOwner, playerContract, bet)
+                runtime.Notify("gameResult", result)
+       	} else {
+		runtime.Log("game tied")
+                runtime.Notify("gameResult", result)
 	}
 
 	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
-	runtime.Notify("playerBalance", playerBalance)
+        runtime.Notify("playerBalance", playerBalance)
 }
 
-func isWinner(playerChoice, computerChoice string) Result {
+func isWinner(playerChoice int, computerChoice int) int {
 
 	if playerChoice == computerChoice {
-		return Result{tie: true}
+		return 2
 	}
 
-	if playerChoice == "rock" && computerChoice == "scissors" {
-		return Result{win: true}
+	if playerChoice == 1 && computerChoice == 3 {
+		return 1
 	}
 
-	if playerChoice == "scissors" && computerChoice == "paper" {
-		return Result{win: true}
+	if playerChoice == 3 && computerChoice == 2 {
+		return 1
 	}
 
-	if playerChoice == "paper" && computerChoice == "rock" {
-		return Result{win: true}
+	if playerChoice == 2 && computerChoice == 1 {
+		return 1
 	}
 
-	return Result{lose: true}
+	return 0
 }
 
 func OnNEP17Payment(from interop.Hash160, amount int, data any) {
@@ -111,24 +99,12 @@ func OnNEP17Payment(from interop.Hash160, amount int, data any) {
 	}
 }
 
-func changePlayerBalance(ctx storage.Context, playerOwner interop.Hash160, balanceChange int) {
-	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
-	playerContract := runtime.GetExecutingScriptHash()
+func changePlayerBalance(sender interop.Hash160, recipient interop.Hash160, balanceChange int) {
+	ctx := storage.GetContext()
+        zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
 
-	var from, to interop.Hash160
-	var transferAmount int
-	if balanceChange > 0 {
-		from = playerContract
-		to = playerOwner
-		transferAmount = balanceChange
-	} else {
-		from = playerOwner
-		to = playerContract
-		transferAmount = -balanceChange
-	}
-
-	transferred := contract.Call(zaCoinHash, "transfer", contract.All, from, to, transferAmount, nil).(bool)
-	if !transferred {
-		panic("failed to transfer zaCoins")
-	}
+        transferred := contract.Call(zaCoinHash, "transfer", contract.All, sender, recipient, balanceChange, nil).(bool)
+        if !transferred {
+                panic("failed to transfer zaCoins")
+        }
 }

@@ -32,6 +32,7 @@ func _deploy(data interface{}, isUpdate bool) {
 func PlayCraps(bet int, firstSum int, secondSum int) {
 	ctx := storage.GetContext()
 	playerOwner := runtime.GetScriptContainer().Sender
+	playerContract := runtime.GetExecutingScriptHash()
 
 	if bet <= 0 {
 		panic("Invalid bet amount")
@@ -43,11 +44,14 @@ func PlayCraps(bet int, firstSum int, secondSum int) {
 		panic("Insufficient funds")
 	}
 
+
 	isWin := isWinner(firstSum, secondSum)
 	if (isWin){
-		changePlayerBalance(ctx, playerOwner, bet)
+		changePlayerBalance(playerContract, playerOwner, bet)
+		runtime.Notify("gameResult", int(1))
 	} else {
-		changePlayerBalance(ctx, playerOwner, -bet)
+		changePlayerBalance(playerOwner, playerContract, bet)
+		runtime.Notify("gameResult", int(0))
 	}
 	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
         runtime.Notify("playerBalance", playerBalance)
@@ -61,7 +65,6 @@ func isWinner(firstSum int, secondSum int) bool {
 	sum := 0
 	for i:=0; i<2; i++ {
 		crap := (runtime.GetRandom() % 6) + 1
-		runtime.Log("Crup number " + string(i+1) + " Rundom number " + string(crap))
 		runtime.Notify("Crup number", i+1)
 		runtime.Notify("Random number", crap)
 		sum += crap
@@ -81,23 +84,11 @@ func OnNEP17Payment(from interop.Hash160, amount int, data any) {
 	}
 }
 
-func changePlayerBalance(ctx storage.Context, playerOwner interop.Hash160, balanceChange int) {
-	zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
-	playerContract := runtime.GetExecutingScriptHash()
+func changePlayerBalance(sender interop.Hash160, recipient interop.Hash160, balanceChange int) {
+	ctx := storage.GetContext()
+        zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
 
-	var from, to interop.Hash160
-	var transferAmount int
-	if balanceChange > 0 {
-		from = playerContract
-		to = playerOwner
-		transferAmount = balanceChange
-	} else {
-		from = playerOwner
-		to = playerContract
-		transferAmount = -balanceChange
-	}
-
-	transferred := contract.Call(zaCoinHash, "transfer", contract.All, from, to, transferAmount, nil).(bool)
+	transferred := contract.Call(zaCoinHash, "transfer", contract.All, sender, recipient, balanceChange, nil).(bool)
 	if !transferred {
 		panic("failed to transfer zaCoins")
 	}

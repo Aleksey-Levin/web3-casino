@@ -3,8 +3,12 @@ supportedstandards: []
 events:
   - name: computerChoice
     parameters:
-      - name: str
-        type: String
+      - name: int
+        type: Integer
+  - name: gameResult
+    parameters:
+      - name: int
+        type: Integer
   - name: playerBalance
     parameters:
       - name: int
@@ -14,3 +18,4 @@ permissions:
     events:
       - computerChoice
       - playerBalance
+      - gameResult
