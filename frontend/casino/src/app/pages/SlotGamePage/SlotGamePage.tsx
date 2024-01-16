@@ -1,5 +1,5 @@
 import ContainerLayout from "../../utils/ContainerLayout";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import Reel from "../../components/App/Slot/Reel";
 import { useEffect, useState } from "react";
 import SlotPlayButton from "../../components/web3/SlotPlayButton";
@@ -7,7 +7,6 @@ import SlotPlayButton from "../../components/web3/SlotPlayButton";
 
 export const SlotGamePage = () => {
     const [isHorizontal, setIsHorizontal] = useState(false);
-    const [cellCount, setCellCount] = useState(7);
     const [rng, setRng] = useState(false);
     const [rngReverse, setRngReverse] = useState(false);
 
@@ -19,13 +18,6 @@ export const SlotGamePage = () => {
         } else {
             setIsHorizontal(false);
         }
-    };
-
-    const handleRng = () => {
-        setRng(!rng);
-    };
-    const handleRngReverse = () => {
-        setRngReverse(!rngReverse);
     };
 
     const spinReels = () => {
@@ -58,9 +50,9 @@ export const SlotGamePage = () => {
 
                 <div className="min-h-[800px] w-full flex items-center justify-center">
                     <div className="flex flex-row portrait:flex-col justify-center items-center my-auto">
-                        <Reel rng={rng} rngReverse={rngReverse} cellCount={cellCount} isHorizontal={isHorizontal} />
-                        <Reel rng={rng} rngReverse={rngReverse} cellCount={cellCount} isHorizontal={isHorizontal} />
-                        <Reel rng={rng} rngReverse={rngReverse} cellCount={cellCount} isHorizontal={isHorizontal} />
+                        <Reel rng={rng} rngReverse={rngReverse} cellCount={7} isHorizontal={isHorizontal} />
+                        <Reel rng={rng} rngReverse={rngReverse} cellCount={7} isHorizontal={isHorizontal} />
+                        <Reel rng={rng} rngReverse={rngReverse} cellCount={7} isHorizontal={isHorizontal} />
                     </div>
                 </div>
 
@@ -72,6 +64,6 @@ export const SlotGamePage = () => {
     );
 };
 
-SlotGamePage.propTypes = {
-    cellCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
+// SlotGamePage.propTypes = {
+//     // cellCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+// };
