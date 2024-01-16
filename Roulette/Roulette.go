@@ -49,10 +49,10 @@ func PlayRoulette(bet int, selectedNumber int) {
 	isWin := isWinner(selectedNumber)
 	if isWin {
 		winAmount := calculateWinAmount(bet, selectedNumber)
-		changePlayerBalance(zaCoinHash, playerContract, playerOwner, winAmount)
+		changePlayerBalance(playerContract, playerOwner, winAmount)
                 runtime.Notify("gameResult", int(1))
 	} else {
-		changePlayerBalance(zaCoinHash, playerOwner, playerContract, bet)
+		changePlayerBalance(playerOwner, playerContract, bet)
                 runtime.Notify("gameResult", int(0))
 	}
 	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
@@ -67,17 +67,16 @@ func isWinner(selectedNumber int) bool {
 }
 
 func calculateWinAmount(bet int, selectedNumber int) int {
-	coefficients := map[int]int{
-		1: 36,
-		2: 18,
-		3: 2,
-	}
-
-	if coefficient, ok := coefficients[selectedNumber]; ok {
-		return bet * coefficient
-	}
-
-	return 0
+	coefs := []int{10, 20, 30, 2}
+ 	if selectedNumber == 36 {
+  		return bet * coefs[0]
+ 	} else if selectedNumber == 18 {
+ 	 	return bet * coefs[1]
+ 	} else if  selectedNumber == 2 {
+  		return bet * coefs[2]
+ 	} else {
+  		return bet * coefs[3]
+ 	}
 }
 
 func OnNEP17Payment(from interop.Hash160, amount int, data any) {
@@ -90,7 +89,9 @@ func OnNEP17Payment(from interop.Hash160, amount int, data any) {
 	}
 }
 
-func changePlayerBalance(zaCoinHash interop.Hash160, sender interop.Hash160, recipient interop.Hash160, balanceChange int) {
+func changePlayerBalance(sender interop.Hash160, recipient interop.Hash160, balanceChange int) {
+	ctx := storage.GetContext()
+        zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
 
         transferred := contract.Call(zaCoinHash, "transfer", contract.All, sender, recipient, balanceChange, nil).(bool)
         if !transferred {

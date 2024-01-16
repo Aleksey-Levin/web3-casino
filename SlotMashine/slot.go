@@ -47,11 +47,11 @@ func RollSlot(bet int) {
 
 	res := roll()
 	if (res == 0){
-		changePlayerBalance(zaCoinHash, playerOwner, playerContract, bet)
+		changePlayerBalance(playerOwner, playerContract, bet)
                 runtime.Notify("gameResult", int(0))
 	} else {
 		win := res * bet
-		changePlayerBalance(zaCoinHash, playerContract, playerOwner, win)
+		changePlayerBalance(playerContract, playerOwner, win)
                 runtime.Notify("gameResult", int(1))
 	}
 	playerBalance = contract.Call(zaCoinHash, "balanceOf", contract.ReadStates, playerOwner).(int)
@@ -87,7 +87,9 @@ func OnNEP17Payment(from interop.Hash160, amount int, data any) {
 	}
 }
 
-func changePlayerBalance(zaCoinHash interop.Hash160, sender interop.Hash160, recipient interop.Hash160, balanceChange int) {
+func changePlayerBalance(sender interop.Hash160, recipient interop.Hash160, balanceChange int) {
+	ctx := storage.GetContext()
+        zaCoinHash := storage.Get(ctx, zaCoinHashKey).(interop.Hash160)
 
         transferred := contract.Call(zaCoinHash, "transfer", contract.All, sender, recipient, balanceChange, nil).(bool)
         if !transferred {

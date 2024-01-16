@@ -1,0 +1,11 @@
+name: ZaCoinRefill
+supportedstandards: []
+events:
+  - name: "playerBalance"
+    parameters:
+      - name: "int"
+        type: "Integer"
+permissions:
+  - methods: "*"
+    events:
+      - "playerBalance"
