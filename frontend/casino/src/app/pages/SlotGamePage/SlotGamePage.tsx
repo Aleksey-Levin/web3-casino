@@ -1,48 +1,58 @@
-import ContainerLayout from "../../utils/ContainerLayout"
-import PropTypes from 'prop-types';
-import Reel from '../../components/App/Slot/Reel';
-import { useEffect, useState } from 'react';
-import { RPSPlayButton } from '../../components/web3/RPSPlayButton';
+import ContainerLayout from "../../utils/ContainerLayout";
+import PropTypes from "prop-types";
+import Reel from "../../components/App/Slot/Reel";
+import { useEffect, useState } from "react";
+import SlotPlayButton from "../../components/web3/SlotPlayButton";
+
 
 export const SlotGamePage = () => {
-    const [isHorizontal, setIsHorizontal] = useState(false)
-    const [cellCount, setCellCount] = useState(7)
-    const [rng, setRng] = useState(false)
-    const [rngReverse, setRngReverse] = useState(false)
+    const [isHorizontal, setIsHorizontal] = useState(false);
+    const [cellCount, setCellCount] = useState(7);
+    const [rng, setRng] = useState(false);
+    const [rngReverse, setRngReverse] = useState(false);
 
-    const mql = window.matchMedia('(orientation: portrait)')
+    const mql = window.matchMedia("(orientation: portrait)");
 
     mql.onchange = (e) => {
         if (e.matches) {
-            setIsHorizontal(true)
+            setIsHorizontal(true);
         } else {
-            setIsHorizontal(false)
+            setIsHorizontal(false);
         }
-    }
+    };
 
     const handleRng = () => {
-        setRng(!rng)
-    }
+        setRng(!rng);
+    };
     const handleRngReverse = () => {
-        setRngReverse(!rngReverse)
-    }
+        setRngReverse(!rngReverse);
+    };
+
+    const spinReels = () => {
+        // Trigger the spinning effect in each reel
+        setRng(!rng);
+        setRngReverse(!rngReverse);
+    };
 
     useEffect(() => {
         if (mql.matches) {
-            setIsHorizontal(true)
+            setIsHorizontal(true);
         } else {
-            setIsHorizontal(false)
+            setIsHorizontal(false);
         }
-    }, [])
+    }, []);
+
     return (
         <ContainerLayout>
             <div className="flex flex-row gap-4">
                 <div className="max-h-[180px] bg-green-700 flex flex-col justify-between shadow text-white text-2xl font-bold py-4 px-6 rounded-xl">
                     <div className="flex flex-col">
-                        <p>выигрыш:</p><span className="text-yellow-400">5000</span>
+                        <p>выигрыш:</p>
+                        <span className="text-yellow-400">5000</span>
                     </div>
                     <div className="flex flex-col">
-                        <p>ставка:</p><span className="text-yellow-400">10 000</span>
+                        <p>ставка:</p>
+                        <span className="text-yellow-400">10 000</span>
                     </div>
                 </div>
 
@@ -54,14 +64,14 @@ export const SlotGamePage = () => {
                     </div>
                 </div>
 
-                <div className="max-w-[100px]">
-                    <RPSPlayButton />
+                <div className="max-w-[200px]">
+                    <SlotPlayButton onClick={spinReels} />
                 </div>
             </div>
         </ContainerLayout>
     );
-}
+};
 
 SlotGamePage.propTypes = {
-    cellCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+    cellCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
