@@ -56,7 +56,7 @@ export const SlotGamePage = () => {
                     </div>
                 </div>
 
-                <div className="min-h-[800px] w-full bg-fuchsia-600 flex items-center justify-center">
+                <div className="min-h-[800px] w-full flex items-center justify-center">
                     <div className="flex flex-row portrait:flex-col justify-center items-center my-auto">
                         <Reel rng={rng} rngReverse={rngReverse} cellCount={cellCount} isHorizontal={isHorizontal} />
                         <Reel rng={rng} rngReverse={rngReverse} cellCount={cellCount} isHorizontal={isHorizontal} />
