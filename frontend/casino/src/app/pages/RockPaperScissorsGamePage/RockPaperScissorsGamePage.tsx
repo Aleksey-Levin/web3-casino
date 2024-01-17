@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ContainerLayout from "../../utils/ContainerLayout"
 import { RPSPlayButton } from "../../components/web3/RPSPlayButton"
 
