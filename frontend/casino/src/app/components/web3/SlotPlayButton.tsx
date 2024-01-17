@@ -1,14 +1,22 @@
-import {useSlotMachine} from "../../web3/functions/SlotMachine/useSlotMachine.ts";
+import PropTypes from "prop-types";
 
-export const SlotPlayButton = () => {
+interface SlotPlayButtonProps {
+    onClick: () => void;
+}
 
-    const { playSlot } = useSlotMachine()
-
+const SlotPlayButton: React.FC<SlotPlayButtonProps> = ({ onClick }) => {
     return (
         <button
-            onClick={() => { playSlot() }}
-            className="bg-rose-700 rounded-[100px] shadow text-white text-2xl font-bold py-5 px-10 hover:bg-rose-600">
+            className="bg-rose-700 rounded-[100px] shadow text-white text-2xl font-bold py-5 px-10 hover:bg-rose-600 max-w-[200px]"
+            onClick={onClick}
+        >
             Крутить
         </button>
-    )
-}
+    );
+};
+
+SlotPlayButton.propTypes = {
+    onClick: PropTypes.func.isRequired,
+};
+
+export default SlotPlayButton;
