@@ -58,7 +58,7 @@ func PlayCraps(bet int, firstSum int, secondSum int) {
 }
 
 func isWinner(firstSum int, secondSum int) bool {
-	if (!((firstSum >= 2 && firstSum <= 12) && (secondSum >= 2 && firstSum <= 12))){
+	if (!((firstSum >= 2 && firstSum <= 12) && (secondSum >= 2 && secondSum <= 12))){
 		panic("first and second sum should be from 2 to 12")
 	}
 
