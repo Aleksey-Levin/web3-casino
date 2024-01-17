@@ -5,6 +5,7 @@ import chipImg from '../../../../assets/icons/chip.png'
 import {useStores} from "../../../hooks/useStores.tsx";
 import {observer} from "mobx-react-lite";
 import {CheckBalanceButton} from "../../../web3/balance/CheckBalanceButton.tsx";
+import {FaucetButton} from "../../web3/FaucetButton.tsx";
 
 export const AppNav = observer(() => {
     const { userStore } = useStores()
@@ -23,14 +24,11 @@ export const AppNav = observer(() => {
                         <div className="rounded-[100px] bg-[#2D313D] flex flex-row items-center justify-between shadow-inset">
                             <div className="flex flex-row gap-[3px] items-center px-[15px] py-[11px]">
                                 <CoinIcon />
-                                {/* placeholder for balance */}
-                                {userStore.balance ? <span>{userStore.balance}</span> : <CheckBalanceButton/>}
+                                {userStore.balance ? <span> {
+                                    parseFloat(userStore.balance) > 5 ? userStore.balance : <FaucetButton/>
+                                }</span> : <CheckBalanceButton/>}
                             </div>
                             <ConnectStateButton/>
-                        </div>
-                        <div className="flex flex-row items-center">
-                            <span>Robin F.</span>
-                            <ProfileIcon />
                         </div>
                     </div>
                 </div>

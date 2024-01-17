@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import ContainerLayout from "../../utils/ContainerLayout.tsx";
 import Reel from "../../components/App/Slot/Reel.tsx";
 import SlotPlayButton from "../../components/web3/SlotPlayButton.tsx";

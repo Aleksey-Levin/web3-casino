@@ -14,7 +14,7 @@ export const useSlotMachine = () => {
                 scriptHash: config.slotMachine.contractAddress,
                 operation: 'rollSlot',
                 args: [
-                    { type: 'Integer', value: '40' },
+                    { type: 'Integer', value: '4' },
                 ]
             }],
             signers: [{
