@@ -1,5 +1,4 @@
 import CoinIcon from "../../icons/CoinIcon";
-import ProfileIcon from "../../icons/ProfileIcon";
 import {ConnectStateButton} from "../../../web3/connect";
 import chipImg from '../../../../assets/icons/chip.png'
 import {useStores} from "../../../hooks/useStores.tsx";
