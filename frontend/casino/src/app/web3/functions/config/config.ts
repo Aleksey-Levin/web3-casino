@@ -13,5 +13,8 @@ export const config = {
     },
     rps: {
         contractAddress: 'ae71ad7c8174530cddecf483e8094539f84fcd7f'
+    },
+    zaFaucet: {
+        contractAddress: '66621b53f51303d29a224cb6e5deeec30ad2631b'
     }
 }

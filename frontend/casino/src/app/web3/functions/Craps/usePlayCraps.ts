@@ -14,7 +14,7 @@ export const usePlayCraps = () => {
                 scriptHash: config.craps.contractAddress,
                 operation: 'playCraps',
                 args: [
-                    { type: 'Integer', value: '40' },
+                    { type: 'Integer', value: '4' },
                     { type: 'Integer', value: value.toString() },
                     { type: 'Integer', value: secondValue.toString() },
                 ]

@@ -3,20 +3,17 @@ import {useCallback} from "react";
 import {useGetResult} from "../utils/useGetResult.ts";
 import {config} from "../config/config.ts";
 
-export const usePlayRPS = () => {
+export const useFaucet = () => {
     const wcSdk = useWalletConnect()
     const { getResult, ...statuses } = useGetResult()
 
-    const playRPS = useCallback(async (value: string) => {
-        console.log(config.rps.contractAddress)
+    const faucet = useCallback(async () => {
+        console.log(config.zaFaucet.contractAddress)
         const resp = await wcSdk.invokeFunction({
             invocations: [{
-                scriptHash: config.rps.contractAddress,
-                operation: 'playRPS',
-                args: [
-                    { type: 'Integer', value: value },
-                    { type: 'Integer', value: '4' },
-                ]
+                scriptHash: config.zaFaucet.contractAddress,
+                operation: 'getZaCoin',
+                args: []
             }],
             signers: [{
                 scopes: 'Global',
@@ -27,7 +24,7 @@ export const usePlayRPS = () => {
     }, [wcSdk, getResult])
 
     return {
-        playRPS,
+        faucet,
         ...statuses
     }
 }
