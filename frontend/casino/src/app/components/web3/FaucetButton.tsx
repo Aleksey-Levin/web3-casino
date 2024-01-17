@@ -1,4 +1,3 @@
-import {useCheckBalance} from "./useCheckBalance.ts";
 import {observer} from "mobx-react-lite";
 import {useEffect} from "react";
 import {useStores} from "../../hooks/useStores.tsx";
