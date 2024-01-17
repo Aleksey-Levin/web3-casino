@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Reel from '../../components/App/Slot/Reel';
 import { useEffect, useState } from 'react';
 import { RPSPlayButton } from '../../components/web3/RPSPlayButton';
+import {SlotPlayButton} from "../../components/web3/SlotPlayButton.tsx";
 
 export const SlotGamePage = () => {
     const [isHorizontal, setIsHorizontal] = useState(false)
@@ -55,7 +56,7 @@ export const SlotGamePage = () => {
                 </div>
 
                 <div className="max-w-[100px]">
-                    <RPSPlayButton />
+                    <SlotPlayButton />
                 </div>
             </div>
         </ContainerLayout>

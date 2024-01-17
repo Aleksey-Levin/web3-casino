@@ -1,4 +1,4 @@
-import LoadingImg from '../../../assets/Capibebra.gif'
+import LoadingImg from '../../../assets/LoadingScreen.gif'
 import { styled } from '../../../styles'
 
 const LoadingStyle = styled('div', {
@@ -12,7 +12,7 @@ const LoadingStyle = styled('div', {
 const Loading = () => {
     return (
         <LoadingStyle>
-            <img src={LoadingImg} />
+            <img style={{ width: '100vw' }} src={LoadingImg} />
         </LoadingStyle>
     )
 }
