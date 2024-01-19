@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { CheckBalanceButton } from "../../../web3/balance/CheckBalanceButton.tsx";
 import { FaucetButton } from "../../web3/FaucetButton.tsx";
 import { DropdownMenu } from "../../ui/dropdown-menu.tsx";
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "../../ui/button.tsx";
 
 export const AppNav = observer(() => {
