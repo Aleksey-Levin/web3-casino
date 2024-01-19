@@ -1,10 +1,13 @@
 import CoinIcon from "../../icons/CoinIcon";
-import {ConnectStateButton} from "../../../web3/connect";
+import { ConnectStateButton } from "../../../web3/connect";
 import chipImg from '../../../../assets/icons/chip.png'
-import {useStores} from "../../../hooks/useStores.tsx";
-import {observer} from "mobx-react-lite";
-import {CheckBalanceButton} from "../../../web3/balance/CheckBalanceButton.tsx";
-import {FaucetButton} from "../../web3/FaucetButton.tsx";
+import { useStores } from "../../../hooks/useStores.tsx";
+import { observer } from "mobx-react-lite";
+import { CheckBalanceButton } from "../../../web3/balance/CheckBalanceButton.tsx";
+import { FaucetButton } from "../../web3/FaucetButton.tsx";
+import { DropdownMenu } from "../../ui/dropdown-menu.tsx";
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { Button } from "../../ui/button.tsx";
 
 export const AppNav = observer(() => {
     const { userStore } = useStores()
@@ -19,19 +22,38 @@ export const AppNav = observer(() => {
                             <span className="text-gray-400">.bet</span>
                         </span>
                     </a>
-                    <div className="flex flex-row gap-8">
+                    <div className="flex-row gap-8 hidden sm:flex">
                         <div className="rounded-[100px] bg-[#2D313D] flex flex-row items-center justify-between shadow-inset">
                             <div className="flex flex-row gap-[3px] items-center px-[15px] py-[11px]">
                                 <CoinIcon />
                                 {userStore.balance ? <span> {
-                                    parseFloat(userStore.balance) > 5 ? userStore.balance : <FaucetButton/>
-                                }</span> : <CheckBalanceButton/>}
+                                    parseFloat(userStore.balance) > 5 ? userStore.balance : <FaucetButton />
+                                }</span> : <CheckBalanceButton />}
                             </div>
-                            <ConnectStateButton/>
+                            <ConnectStateButton />
                         </div>
                     </div>
+                    <div className="block sm:hidden my-auto">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button className="bg-[#2D313D] text-white" variant="outline">Menu</Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="bg-[#2D313D] mt-[25px] mr-[20px] p-4 rounded">
+                                <DropdownMenuItem>
+                                    <div className="flex flex-row gap-[3px] items-center px-[15px] py-[11px]">
+                                        <CoinIcon />
+                                        {userStore.balance ? <span> {
+                                            parseFloat(userStore.balance) > 5 ? userStore.balance : <FaucetButton />
+                                        }</span> : <CheckBalanceButton />}
+                                    </div>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem><ConnectStateButton /></DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+
                 </div>
             </div>
         </div>
-        )
+    )
 })
