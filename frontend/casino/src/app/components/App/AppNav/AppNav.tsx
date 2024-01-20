@@ -16,8 +16,8 @@ export const AppNav = observer(() => {
             <div className="container mx-auto">
                 <div className="flex flex-row justify-between">
                     <a href="/" className="flex flex-row items-center">
-                        <img src={chipImg} alt="Icon" className="w-[53px] h-[53px] mr-[15px]" />
-                        <span className="font-semibold text-3xl">
+                        <img src={chipImg} alt="Icon" className="w-[40px] h-[40px] sm:w-[53px] sm:h-[53px] mr-2 sm:mr-[15px]" />
+                        <span className="font-semibold text-xl sm:text-3xl">
                             <span className="bg-gradient-to-b from-white via-blue-400 to-red-400 bg-clip-text text-transparent">Z</span>aSlot
                             <span className="text-gray-400">.bet</span>
                         </span>
