@@ -29,6 +29,7 @@
     "eslint-plugin-mobx": "^0.0.9",
     "framer-motion": "^10.16.12",
     "jdenticon": "^3.2.0",
+    "lucide": "^0.312.0",
     "lucide-react": "^0.312.0",
     "luxon": "^3.4.4",
     "mobx": "^6.12.0",

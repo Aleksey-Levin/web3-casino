@@ -7167,6 +7167,11 @@ lucide-react@^0.312.0:
   resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.312.0.tgz#2dee3f46068eb01aa060ff7cb60d430c107decb5"
   integrity sha512-3UZsqyswRXjW4t+nw+InICewSimjPKHuSxiFYqTshv9xkK3tPPntXk/lvXc9pKlXIxm3v9WKyoxcrB6YHhP+dg==
 
+lucide@^0.312.0:
+  version "0.312.0"
+  resolved "https://registry.yarnpkg.com/lucide/-/lucide-0.312.0.tgz#d003f3e2071fe0d8ebbd6c62c237ad3ec6e3ba4e"
+  integrity sha512-55fRrT/HuYDJqhLEfxmbIT91GiYNg8eB2tnPrI3gsFgHMgCAMXpPSYl9YYffQUz4t2OreO1SLn74JWTLr9J43A==
+
 luxon@^3.4.4:
   version "3.4.4"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.4.tgz#cf20dc27dc532ba41a169c43fdcc0063601577af"
