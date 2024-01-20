@@ -48,7 +48,7 @@ const games: Game[] = [
 
 export const MainPage = () => {
     return (
-        <ContainerLayout>
+        <ContainerLayout className="-mt-[60px] min-h-[700px]">
             <div className="absolute max-w-[1235px] h-[629px] overflow-hidden">
                 <img
                     src={casinoBg}
@@ -60,7 +60,7 @@ export const MainPage = () => {
             </div>
 
 
-            <div className="w-full h-max-content bg-gray-800 rounded-[25px] p-[30px] text-white flex flex-col gap-[30px] relative z-10 mt-[400px]">
+            <div className="w-full h-max-content bg-gray-800 rounded-[25px] p-[20px] sm:px-[30px] text-white flex flex-col gap-[30px] relative z-10 mt-[400px]">
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-row items-center gap-2">
                         <GamepadIcon />
@@ -76,7 +76,7 @@ export const MainPage = () => {
                             <CarouselItem key={index} className="pl-1 lg:basis-1/3 sm:basis-1/2">
                                 <div className="pl-1 h-full">
                                     <Card className="bg-[#323846] border-2 border-gray-700 min-h-full items-center">
-                                        <CardContent className="flex items-center justify-between p-2 gap-2">
+                                        <CardContent className="w-full flex flex-row items-center justify-between p-2 gap-4">
                                             <div className="rounded-full bg-neutral-800 inline-block">
                                                 <img
                                                     src={game.img}
@@ -84,10 +84,12 @@ export const MainPage = () => {
                                                     className="object-cover"
                                                 />
                                             </div>
-                                            <CardTitle className="text-white tracking-tight">{game.title}</CardTitle>
-                                            <Button asChild>
-                                                <Link to={game.link}>Play</Link>
-                                            </Button>
+                                            <div className="w-full flex flex-col gap-4 sm:ml-4 md:flex-row md:items-center md:justify-between">
+                                                <CardTitle className="text-white tracking-tight">{game.title}</CardTitle>
+                                                <Button asChild className="block self-start">
+                                                    <Link to={game.link}>Play</Link>
+                                                </Button>
+                                            </div>
                                         </CardContent>
                                     </Card>
                                 </div>
