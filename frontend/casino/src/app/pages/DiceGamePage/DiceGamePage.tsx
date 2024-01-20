@@ -102,13 +102,9 @@ export const DiceGamePage = observer(() => {
                             Сумма: {totalSum}
                         </p>
                     </div>
-                    {/* {(diceValue && !isLoading) && <div className="bg-gray-800 rounded-[30px] shadow text-white text-md sm:text-lg font-bold py-2 sm:py-4 px-6 sm:px-12">
+                    {(diceValue && !isLoading) && <div className="bg-gray-800 rounded-[30px] shadow text-white text-md sm:text-lg font-bold py-2 sm:py-4 px-6 sm:px-12">
                         Выпало число: {diceValue}
-                    </div>} */}
-                    {/* mock */}
-                    <div className="bg-gray-800 rounded-[30px] shadow text-white text-md sm:text-lg font-bold py-2 sm:py-4 px-6 sm:px-12">
-                        Выпало число: {diceValue}
-                    </div>
+                    </div>}
                 </div>
             </div>
         </ContainerLayout>
