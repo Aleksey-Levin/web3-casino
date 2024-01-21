@@ -1,15 +1,55 @@
 import ContainerLayout from "../../utils/ContainerLayout";
 import GamepadIcon from "../../components/icons/GamepadIcon";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import casinoBg from '../../../assets/img/casino-bg-image.png'
 import diceSmall from '../../../assets/img/dices-small.png'
 import rpsSmall from '../../../assets/img/rps-small.png'
 import slotMachine from '../../../assets/img/slot-machine-small.png'
 
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "../../components/ui/carousel"
+import {
+    Card,
+    CardContent,
+    CardTitle
+} from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
+
+
+interface Game {
+    title: string;
+    img: string;
+    link: string;
+}
+
+const games: Game[] = [
+    {
+        title: 'Dice',
+        img: diceSmall,
+        link: '/dice',
+    },
+    {
+        title: 'RPS',
+        img: rpsSmall,
+        link: '/rock-paper-scissors',
+    },
+    {
+        title: 'Slots',
+        img: slotMachine,
+        link: '/slot',
+    },
+];
+
+
 export const MainPage = () => {
     return (
-        <ContainerLayout>
-            <div className="absolute w-[1235px] h-[629px] overflow-hidden">
+        <ContainerLayout className="-mt-[60px] min-h-[700px]">
+            <div className="absolute max-w-[1235px] h-[629px] overflow-hidden">
                 <img
                     src={casinoBg}
                     alt="Icon"
@@ -18,7 +58,9 @@ export const MainPage = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#171A21] via-[rgba(22, 25, 32, 0.10)] to-[#171A21] via-[rgba(22,22,22,0)]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#171A21] via-[rgba(22, 25, 32, 0.10)] to-[#171A21] via-[rgba(22,22,22,0)]" />
             </div>
-            <div className="w-full h-max-content bg-gray-800 rounded-[25px] p-[30px] text-white flex flex-col gap-[30px] relative z-10 mt-[400px]">
+
+
+            <div className="w-full h-max-content bg-gray-800 rounded-[25px] p-[20px] sm:px-[30px] text-white flex flex-col gap-[30px] relative z-10 mt-[400px]">
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-row items-center gap-2">
                         <GamepadIcon />
@@ -26,68 +68,38 @@ export const MainPage = () => {
                             Games
                         </span>
                     </div>
-                    <div className="flex flex-row gap-2 items-center">
-                        <div className="w-max-content h-max-content bg-gray-700 rounded-md px-[10px] cursor-pointer">
-                            <span className="font-bold">&#10094;</span>
-                        </div>
-                        <div className="w-max-content h-max-content bg-gray-700 rounded-md px-[10px] cursor-pointer">
-                            <span className="font-bold">&#10095;</span>
-                        </div>
-                        <div className="w-max-content h-max-content bg-gray-700 rounded-md px-[10px] cursor-pointer">
-                            <span className="font-bold">See all</span>
-                        </div>
-                    </div>
                 </div>
-                <div className="flex flex-row justify-between">
-                    {/* dices */}
-                    <div className="w-[374px] h-[187.35px] bg-[#323846] rounded-[23px] border-2 border-gray-700 flex flex-row items-center justify-between px-4 py-6 gap-3">
-                        <div className="rounded-full bg-neutral-800 inline-block">
-                            <img
-                                src={diceSmall}
-                                alt="Icon"
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="flex flex-col h-full justify-between">
-                            <div className="flex flex-row justify-between min-w-[200px] my-auto items-center">
-                                <span className="text-xl font-bold">DICE</span>
-                                <Link to="dice" className="min-w-[100px] max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center">Play now</Link>
-                            </div>
-                        </div>
-                    </div>
-                    {/* Rock paper scissorstel */}
-                    <div className="w-[404px] h-[187.35px] bg-[#323846] rounded-[23px] border-2 border-gray-700 flex flex-row items-center justify-between px-4 py-6 gap-3">
-                        <div className="rounded-full w-[140px] bg-neutral-800 inline-block">
-                            <img
-                                src={rpsSmall}
-                                alt="Icon"
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="flex flex-col h-full justify-between">
-                            <div className="flex flex-row justify-between min-w-[200px] my-auto">
-                                <span className="text-xl font-bold uppercase">Rock paper scissors</span>
-                                <Link to="/rock-paper-scissors" className="min-w-[100px]max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center py-2">Play now</Link>
-                            </div>
-                        </div>
-                    </div>
-                    {/* slot */}
-                    <div className="w-[374px] h-[187.35px] bg-[#323846] rounded-[23px] border-2 border-gray-700 flex flex-row items-center justify-between px-4 py-6 gap-3">
-                        <div className="rounded-full bg-neutral-800 inline-block">
-                            <img
-                                src={slotMachine}
-                                alt="Icon"
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="flex flex-col h-full justify-between">
-                            <div className="flex flex-row justify-between min-w-[200px] my-auto">
-                                <span className="text-xl font-bold uppercase">Slot machine</span>
-                                <Link to="/slot" className="min-w-[100px]max-h-[45px] bg-blue-500 rounded-[10px] border border-blue-400 font-bold px-3 items-center flex justify-center py-2">Play now</Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                <Carousel className="w-full">
+                    <CarouselContent className="-ml-1 px-[32px]">
+                        {games.map((game, index) => (
+                            <CarouselItem key={index} className="pl-1 lg:basis-1/3 sm:basis-1/2">
+                                <div className="pl-1 h-full">
+                                    <Card className="bg-[#323846] border-2 border-gray-700 min-h-full items-center">
+                                        <CardContent className="w-full flex flex-row items-center justify-between p-2 gap-4">
+                                            <div className="rounded-full bg-neutral-800 inline-block">
+                                                <img
+                                                    src={game.img}
+                                                    alt="Icon"
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                            <div className="w-full flex flex-col gap-4 sm:ml-4 md:flex-row md:items-center md:justify-between">
+                                                <CardTitle className="text-white tracking-tight">{game.title}</CardTitle>
+                                                <Button asChild className="block self-start">
+                                                    <Link to={game.link}>Play</Link>
+                                                </Button>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="translate-x-[32px] bg-gray-600 active:bg-gray-500" />
+                    <CarouselNext className="-translate-x-[32px] bg-gray-600 active:bg-gray-500" />
+                </Carousel>
+
             </div>
         </ContainerLayout>
     );

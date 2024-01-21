@@ -18,39 +18,28 @@ export const RockPaperScissorsGamePage = () => {
     };
 
     return (
-        <ContainerLayout>
-
+        <ContainerLayout className='min-h-[780px]'>
             <div className="grid grid-cols-2">
                 <div className="rounded">
-                    <p className="text-[46px] font-bold uppercase bg-slate-400 rounded inline-block p-4 m-2">
+                    <p className="text-lg sm:text-2xl font-bold uppercase bg-slate-400 rounded inline-block p-2 sm:p-4 m-2">
                         ты
                     </p>
+                    <div className="w-[100px] h-[100px] sm:w-[200px] sm:h-[200px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px]">
+                        <img src={userChoice} alt="your_hand" onClick={handleImageClick} />
+                    </div>
                 </div>
                 <div className="rounded">
-                    <p className="text-[46px] font-bold uppercase bg-slate-400 rounded inline-block p-4 m-2">
-                        не ты
+                    <p className="text-lg sm:text-2xl font-bold uppercase bg-slate-400 rounded inline-block p-2 sm:p-4 m-2">
+                        противник
                     </p>
+                    <div className="w-[100px] h-[100px] sm:w-[200px] sm:h-[200px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px]">
+                        <img src="src/assets/img/RPS-rock.png" alt="casino_hand" />
+                    </div>
                 </div>
             </div>
-
-            <div className="grid grid-cols-2">
-                <div className="w-[500px] h-[500px]">
-                    <img src={userChoice} alt="your_hand" onClick={handleImageClick} />
-                </div>
-                <div className="w-[500px] h-[500px]">
-                    <img src="src/assets/img/RPS-rock.png" alt="casino_hand" />
-                </div>
-            </div>
-
-            <div className="grid grid-cols-3 items-center">
-                <img src="src/assets/img/RPS-rules.png" alt="rules" />
-                <div className="max-h-[100px] flex items-center justify-center">
-                    <RPSPlayButton />
-                </div>
-                <div className="bg-green-700 shadow text-white text-2xl font-bold py-4 px-6">
-                    <p>won: 5 times</p>
-                    <p>lost: 2 times</p>
-                </div>
+            <div className="flex flex-col-reverse items-center sm:grid sm:grid-cols-3">
+                <img src="src/assets/img/RPS-rules.png" alt="rules" className='mt-[70px] sm:mt-0' />
+                <RPSPlayButton className='mt-12 sm:mt-0' />
             </div>
         </ContainerLayout>
     )
